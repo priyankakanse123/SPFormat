@@ -37,6 +37,7 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         
         // print the data fetching from viewmodel
         //print(mContentList![0].mContentImagePath!)
+               
         
         }
     
@@ -84,6 +85,11 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         
     }
     
+    // set tableViewCell height
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
+    }
+    
     // Create an AlertView
     func showAlerView(message : String )
     {
@@ -112,6 +118,7 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         self.showAlerView("Title Selected")
     }
     
+   
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()

@@ -54,13 +54,11 @@ class ContentListViewModel {
                 
                 //call populateData method
                 self.populateDummyData()
-                
-                
             }
             else
             {
                 //populate data from controller
-                populateData()
+                populateContentListData()
             }
 
         }
@@ -68,56 +66,60 @@ class ContentListViewModel {
     
     
     //Populate contentInfoList with Data from controller
-    func populateData()
+    func populateContentListData()
     {
         
         // init controller object
         mContentListControllerObject = ContentListController()
         
-        //get total count of contents from controller
-        let totalCount = mContentListControllerObject!.ReturnCountOfAnArray()
+        // get all content data from controller
+        let contentArray = mContentListControllerObject!.getContentDataArrays(0)
         
-        for ( var i = 1 ; i <= totalCount ; ++i )
-        {
+        // retrieve contentInfoArray from ContentArray (object)
+        var contentInfoArray = contentArray.ContentInfoArray
         
-            // create object of contentInfoController
-            let ContentInfoObj = mContentListControllerObject!.getContentDetails(i).ContentInfo
+        // retrieve contentViewArray from ContentArray (object)
+        var contentViewArray = contentArray.ContentViewArray
         
-            //create object of contentViewDetails
-            let ContentViewDetailsObj = mContentListControllerObject!.getContentDetails(i).ContentViw
-        
-            // set a temp object to store ContentListObject attributes
-            let setObj = ContentViewModel(mContentImagePath: ContentInfoObj.mControllerContentImagePath!, mContentTitle: ContentInfoObj.mConrollerContentTitle!, mLastViewTime: ContentViewDetailsObj.mControllerContentLastSeen!, mActionPerformed: ContentViewDetailsObj.mControllerContentAction!, mTotalViews: ContentViewDetailsObj.mControllerContentTotalViews!, mTotalParticipants: ContentViewDetailsObj.mControllerContentTotalParticipants!)
-            print(setObj)
-        
-        
-            //Add the contentList object to  mListOfContents array
-            mListOfContents.append(setObj)
-            print(mListOfContents)
+        // for loop checking giving contentID of contentInfo array
+        // where i stands for the index of contentInfoArray
+        for var i = 0 ; i <  contentInfoArray.count; ++i
+            {
+                //for loop giving function of contentViewArray
+                for var j = 0 ; j < contentViewArray.count ; ++j
+                    {
+                    // matching Content ID of contentInfoObject & contentViewObject
+                      if (contentInfoArray[i].mContentID == contentViewArray[j].mContentID )
+                        {
+                           // set object of viewModel with the contentInfo & contentView values
+                           let setObj = ContentViewModel(mContentImagePath: contentInfoArray[i].mControllerContentImagePath!, mContentTitle: contentInfoArray[i].mConrollerContentTitle!, mLastViewTime: contentViewArray[j].mControllerContentLastSeen!, mActionPerformed: contentViewArray[j].mControllerContentAction!, mTotalViews: contentViewArray[j].mControllerContentTotalViews!, mTotalParticipants: contentViewArray[j].mControllerContentTotalParticipants!)
+                            
+                            // append setObj in the listOfContents array
+                            mListOfContents.append(setObj)
+                        }
+                }
         }
-        
-        
     }
     
+    // populate dummy data when compiler is in unittestMode
     func populateDummyData()
     {
         // set a temp object to store ContentListObject attributes
         let setObj = ContentViewModel(mContentImagePath: "imagePath.jpeg", mContentTitle: "Bat", mLastViewTime: "9.23 pm", mActionPerformed: "opened", mTotalViews: 23, mTotalParticipants: 67)
-        print(setObj)
-        
         
         //Add the contentList object to  mListOfContents array
         mListOfContents.append(setObj)
         print(mListOfContents)
-
     }
     
+    // return the object to the view class
     func getContentInfo (position : Int) -> ContentViewModel
     {
         print(mContentListControllerObject)
         return mListOfContents [position]
     }
     
+    // return the total count of list of total contents
     func getContentInfoCount() -> Int
     {
         return mListOfContents.count

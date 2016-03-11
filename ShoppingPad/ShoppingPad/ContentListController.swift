@@ -38,24 +38,52 @@ struct ContentView
 
 class ContentListController
 {
+    // create object of REST Service handler
+    var mRestServiceHandlerOfContentList : RestServiceHandler?
+    
+    // create object of Model Class
+    var mModel = ContentListModel()
+
+    // create an empty array to store content info data
     var mControllerContentInfoArray = [ContentInfo]()
+    
+    // create an empty arrat to store content view details data
     var mControllerContentViewsDetailsArray = [ContentView]()
+    
     
     init()
     {
-        var mUnitTestVariale = true
+        // Test variable to show the status of the class to the compiler
+        let mUnitTestVariale = false
         
         if (mUnitTestVariale)
         {
-        // call ContentInfo data
-        self.setDummyContentInfoController()
+            // call ContentInfo data
+            self.setDummyContentInfoController()
         
-        // call ContentViewData method
-        self.setDummyContentViewDetails()
+            // call ContentViewData method
+            self.setDummyContentViewDetails()
         }
+            
         else
         {
-        
+            // call the constructor of REST handler
+            mRestServiceHandlerOfContentList = RestServiceHandler()
+            
+            // create object of restHandler's getJSonArray method
+            let restObj = mRestServiceHandlerOfContentList!.getJSONArray()
+            
+            // get contentInfo data in the form of
+            let contentInfoJSONArray : NSMutableArray = restObj.infoJSON
+            
+            // get the content list info data from json
+            self.PopulateContentInfoData(contentInfoJSONArray)
+            
+            // get contentListView details from jSON
+            let contentListViewJsonArray : NSMutableArray = restObj.viewJson
+            
+            // get the content list view deatails data from json 
+            populateContentListDetails(contentListViewJsonArray)
         }
     }
     
@@ -63,7 +91,7 @@ class ContentListController
     // set dummy contentInfo
     func setDummyContentInfoController ()
     {
-        let controllerSetContentInfoObj1 = ContentInfo(mContentID: 2, mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")//ContentInfo(mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")
+        let controllerSetContentInfoObj1 = ContentInfo(mContentID: 5, mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")//ContentInfo(mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")
         
         mControllerContentInfoArray.append(controllerSetContentInfoObj1)
         
@@ -72,7 +100,7 @@ class ContentListController
         
     }
     
-    //set dummy contentViewDetails
+    // set dummy contentViewDetails
     func setDummyContentViewDetails ()
     {
         // set first dummy object
@@ -82,97 +110,50 @@ class ContentListController
         mControllerContentViewsDetailsArray.append(controllerSetContentViewDetailsObj1)
         
         // set second dummy object
-        let controllerSetContentViewDetailsObj2 = ContentView(mContentID: 2, mControllerContentAction: "clicked", mControllerContentLastSeen: "5.19 pm", mControllerContentTotalViews: 90, mControllerContentTotalParticipants: 78)
+        let controllerSetContentViewDetailsObj2 = ContentView(mContentID: 5, mControllerContentAction: "clicked", mControllerContentLastSeen: "5.19 pm", mControllerContentTotalViews: 90, mControllerContentTotalParticipants: 78)
         
         // add second dummy object
         mControllerContentViewsDetailsArray.append(controllerSetContentViewDetailsObj2)
         
     }
     
-    //Return count of an array
-    func ReturnCountOfAnArray() -> Int
+    //  populate model & get model object from controller
+    func PopulateContentInfoData(contentInfoJSONArray : NSMutableArray)
     {
-        return mControllerContentInfoArray.count
-    }
-    
-    
-    //Populate data
-    
-    func PopulateContentInfo()
-    {
-        
-    }
-    
-    func populateContentView()
-    {
-        
-    }
-    
-
-    
-    func getContentDetails(ContentID : Int) -> (ContentInfo : ContentInfo , ContentViw : ContentView)
-    {
-        var positionInfo : Int = 0
-        var positionView : Int = 0
-        var ContentCount : Int = self.ReturnCountOfAnArray()
-        
-        for var i = 0 ; i < ContentCount ; ++i
+        // set & get content info list model object
+        for count in contentInfoJSONArray
         {
-            for var j = 0 ; j < ContentCount ; ++j
-            {
-              if ((ContentID ==  mControllerContentInfoArray[i].mContentID ) && (ContentID == mControllerContentViewsDetailsArray[j].mContentID ))
-                {
-                   positionInfo = i
-                   positionView = j
-                    break
-                    
-                }
-            }
+           let DictObj =  contentInfoDataListModel(JSONContentInfoElement: count as! NSDictionary)
+            
+            // set contentList controller's attributes
+            let temObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath)
+            // append this contentListInfo array
+            mControllerContentInfoArray.append(temObj)
         }
-        return (mControllerContentInfoArray[positionInfo] , mControllerContentViewsDetailsArray[positionView])
-        
     }
     
-        
-//        while positionInfo < self.ReturnCountOfAnArray()
-//        {
-//            print("content ID in function" ,ContentID)
-//            print("position in loop" , positionInfo)
-//           print("contentId in loop" , mControllerContentInfoArray[positionInfo].mContentID!)
-//            
-//            if (ContentID ==  mControllerContentInfoArray[positionInfo].mContentID )//ContentID == mControllerContentViewsDetailsArray[position].mContentID )
-//            {
-//                print("Content ID" , ContentID )
-//                print("postion in if" , positionInfo)
-//                break
-//            }
-//           (positionInfo += 1)
-//            
-//        }
-//        print("positionInfo" , positionInfo)
-//        
-//        while positionView < self.ReturnCountOfAnArray()
-//        {
-//            print("content ID in function" ,ContentID)
-//            print("position in loop" , positionView)
-//            print("contentId in loop" , mControllerContentInfoArray[positionView].mContentID!)
-//            
-//            if (ContentID ==  mControllerContentInfoArray[positionView].mContentID )//ContentID == mControllerContentViewsDetailsArray[position].mContentID )
-//            {
-//                print("Content ID" , ContentID )
-//                print("postion in if" , positionInfo)
-//                break
-//            }
-//            (positionView += 1)
-//        }
-//
-//        
-//        print("positionInfo" , positionInfo)
-//        print("positionView" , positionView)
-        
-//        return (mControllerContentInfoArray[positionInfo] , mControllerContentViewsDetailsArray[positionView ])
-//        
-//    }
+    //  populate model & get model object from controller
+    func populateContentListDetails (contentViewJSONArray : NSMutableArray)
+    {
+        // set & get content list view details data model object
+        for count in contentViewJSONArray
+        {
+            let DictObj = contentViewListDataModel(JSONContentInfoElement: count as! NSDictionary)
+            
+            // set contentList view controller's attributes
+            let temObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants)
+            // append this contentListInfo array
+            mControllerContentViewsDetailsArray.append(temObj)
+        }
+    }
+    
+    // return contentInfo array & contentView array
+    func getContentDataArrays (userID : Int) -> (ContentInfoArray : [ContentInfo] , ContentViewArray : [ContentView])
+    {
+        return (mControllerContentInfoArray , mControllerContentViewsDetailsArray)
+    }
+    
+    
     
 
 }
