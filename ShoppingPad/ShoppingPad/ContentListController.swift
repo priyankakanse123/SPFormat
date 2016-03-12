@@ -41,6 +41,9 @@ class ContentListController
     // create object of REST Service handler
     var mRestServiceHandlerOfContentList : RestServiceHandler?
     
+    // create object of content DBHandler
+    var mContentListDBHandlerObj : ContentListDBHandler?
+    
     // create object of Model Class
     var mModel = ContentListModel()
 
@@ -127,6 +130,21 @@ class ContentListController
             
             // set contentList controller's attributes
             let temObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath)
+            
+            // initiate database in content DB handler
+            mContentListDBHandlerObj = ContentListDBHandler()
+            
+            // save the Content Info data in database
+            
+            // write a query to create Table data base
+            let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT)"
+            
+            // write a query to insert content info data in database
+            let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath) VALUES('\(temObj.mContentID!)','\((temObj.mConrollerContentTitle)!)','\((temObj.mControllerContentImagePath)!)')"
+            
+            // pass these queries to DBHandler to save ContentInfoData
+            mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
+            
             // append this contentListInfo array
             mControllerContentInfoArray.append(temObj)
         }
@@ -142,6 +160,21 @@ class ContentListController
             
             // set contentList view controller's attributes
             let temObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants)
+            
+            // initiate database in contentDB handler
+            mContentListDBHandlerObj = ContentListDBHandler()
+            
+            // save the Content Info data in database
+            
+            // write a query to create Table data base
+            let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
+            
+            // write a query to insert content info data in database
+            let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(temObj.mContentID!),'\((temObj.mControllerContentAction)!)','\((temObj.mControllerContentLastSeen)!)' , \(temObj.mControllerContentTotalViews!) , \(temObj.mControllerContentTotalParticipants!) )"
+            
+            // pass these queries to DBHandler to save ContentInfoData
+            mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
+            
             // append this contentListInfo array
             mControllerContentViewsDetailsArray.append(temObj)
         }
