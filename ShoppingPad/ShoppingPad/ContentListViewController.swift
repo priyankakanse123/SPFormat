@@ -17,6 +17,7 @@ import UIKit
 
 class ContentListViewController: UIViewController , ContentListViewObserver , UITableViewDataSource , UITableViewDelegate
 {
+   // @IBOutlet weak var tableView: UITableView!
     
     
     
@@ -25,21 +26,26 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     
     //contentListArray
     var mContentList = NSArray()
+    
+    
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         // Call viewModel to populate the Data needed for UI
-        mViewModelObj = ContentListViewModel()
+        mViewModelObj = ContentListViewModel(contentListViewObserver: self)
         
-        //Fetch the ContentListArray
-        //var mContentList = mViewModelObj?.getContentInfo()
+        //
         
-        // print the data fetching from viewmodel
-        //print(mContentList![0].mContentImagePath!)
-               
-        
-        }
+        // Populating the Content List in an Async Thread
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.mViewModelObj!.populateContentListData()
+           //print("print" , self.mViewModelObj!.getContentInfo(0))
+        });
+    }
+    
+    
     
     // Return number of sections in tableView
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -124,6 +130,13 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // reload tableview 
+    func updateContentListViewModel()
+    {
+        self.loadView()
+    }
+    
     
 
     /*

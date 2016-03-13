@@ -13,6 +13,8 @@
 		0A05BBDB1C92F02B00CBE2B3 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BBD41C92F02B00CBE2B3 /* FMDatabaseQueue.m */; };
 		0A05BBDC1C92F02B00CBE2B3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BBD71C92F02B00CBE2B3 /* FMResultSet.m */; };
 		0A05BBDE1C92F06A00CBE2B3 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05BBDD1C92F06A00CBE2B3 /* libsqlite3.0.tbd */; };
+		0A0891521C95ADB500C84723 /* PContentListListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0891511C95ADB500C84723 /* PContentListListener.swift */; };
+		0A0891541C95BB2000C84723 /* PContentListInformerToViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0891531C95BB2000C84723 /* PContentListInformerToViewModel.swift */; };
 		0A5F96C91C8BF3C000E6B316 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F96C81C8BF3C000E6B316 /* AppDelegate.swift */; };
 		0A5F96CE1C8BF3C000E6B316 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A5F96CC1C8BF3C000E6B316 /* Main.storyboard */; };
 		0A5F96D11C8BF3C000E6B316 /* ShoppingPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F96CF1C8BF3C000E6B316 /* ShoppingPad.xcdatamodeld */; };
@@ -64,6 +66,8 @@
 		0A05BBD61C92F02B00CBE2B3 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		0A05BBD71C92F02B00CBE2B3 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		0A05BBDD1C92F06A00CBE2B3 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		0A0891511C95ADB500C84723 /* PContentListListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PContentListListener.swift; sourceTree = "<group>"; };
+		0A0891531C95BB2000C84723 /* PContentListInformerToViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PContentListInformerToViewModel.swift; sourceTree = "<group>"; };
 		0A5F96C51C8BF3C000E6B316 /* ShoppingPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5F96C81C8BF3C000E6B316 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A5F96CD1C8BF3C000E6B316 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				0A5F97021C8BF88C00E6B316 /* ContentListViewModel.swift */,
+				0A0891531C95BB2000C84723 /* PContentListInformerToViewModel.swift */,
 			);
 			name = ShoppingPadViewModel;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				0A5F97041C8BF92500E6B316 /* ContentListController.swift */,
+				0A0891511C95ADB500C84723 /* PContentListListener.swift */,
 			);
 			name = ShoppingPadController;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 				0A5F970B1C8BFB8800E6B316 /* ContentListDBHandler.swift in Sources */,
 				0A5F97131C8C52B900E6B316 /* CustomViewCell.swift in Sources */,
 				0A5F97051C8BF92500E6B316 /* ContentListController.swift in Sources */,
+				0A0891521C95ADB500C84723 /* PContentListListener.swift in Sources */,
 				0A05BBD81C92F02B00CBE2B3 /* FMDatabase.m in Sources */,
 				0A5F97161C8C6B7800E6B316 /* Utility.swift in Sources */,
 				0A05BBDB1C92F02B00CBE2B3 /* FMDatabaseQueue.m in Sources */,
@@ -428,6 +435,7 @@
 				0A05BBD91C92F02B00CBE2B3 /* FMDatabaseAdditions.m in Sources */,
 				0A5F97091C8BFB4300E6B316 /* RestServiceHandler.swift in Sources */,
 				0A5F970D1C8BFE9F00E6B316 /* ContentListObserver.swift in Sources */,
+				0A0891541C95BB2000C84723 /* PContentListInformerToViewModel.swift in Sources */,
 				0A05BBDA1C92F02B00CBE2B3 /* FMDatabasePool.m in Sources */,
 				0A5F96D11C8BF3C000E6B316 /* ShoppingPad.xcdatamodeld in Sources */,
 				0A5F96C91C8BF3C000E6B316 /* AppDelegate.swift in Sources */,

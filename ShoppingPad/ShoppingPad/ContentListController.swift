@@ -36,13 +36,15 @@ struct ContentView
     var mControllerContentTotalParticipants : Int?
 }
 
-class ContentListController
+class ContentListController : PContentListListener
 {
     // create object of REST Service handler
     var mRestServiceHandlerOfContentList : RestServiceHandler?
     
     // create object of content DBHandler
     var mContentListDBHandlerObj : ContentListDBHandler?
+    
+    var mContentViewModelListener : PContentListInformerToViewModel?
     
     // create object of Model Class
     var mModel = ContentListModel()
@@ -54,10 +56,13 @@ class ContentListController
     var mControllerContentViewsDetailsArray = [ContentView]()
     
     
-    init()
+    init(contentViewModelListener : PContentListInformerToViewModel)
     {
         // Test variable to show the status of the class to the compiler
         let mUnitTestVariale = false
+        
+        // call the constructor of REST handler
+        mRestServiceHandlerOfContentList = RestServiceHandler()
         
         if (mUnitTestVariale)
         {
@@ -67,26 +72,8 @@ class ContentListController
             // call ContentViewData method
             self.setDummyContentViewDetails()
         }
-            
-        else
-        {
-            // call the constructor of REST handler
-            mRestServiceHandlerOfContentList = RestServiceHandler()
-            
-            // create object of restHandler's getJSonArray method
-            let restObj = mRestServiceHandlerOfContentList!.getJSONArray()
-            
-            // get contentInfo data in the form of
-            let contentInfoJSONArray : NSMutableArray = restObj.infoJSON
-            
-            // get the content list info data from json
-            self.PopulateContentInfoData(contentInfoJSONArray)
-            
-            // get contentListView details from jSON
-            let contentListViewJsonArray : NSMutableArray = restObj.viewJson
-            
-            // get the content list view deatails data from json 
-            populateContentListDetails(contentListViewJsonArray)
+        else {
+            mContentViewModelListener = contentViewModelListener
         }
     }
     
@@ -121,7 +108,15 @@ class ContentListController
     }
     
     //  populate model & get model object from controller
-    func PopulateContentInfoData(contentInfoJSONArray : NSMutableArray)
+    func PopulateContentInfoData()
+    {
+        // populate data in the rest
+        mRestServiceHandlerOfContentList!.populateContenInfoDta(self)
+    }
+
+    
+    // populate controllers data
+    func populateContentInfoData(contentInfoJSONArray : NSMutableArray)
     {
         // set & get content info list model object
         for count in contentInfoJSONArray
@@ -132,18 +127,18 @@ class ContentListController
             let temObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath)
             
             // initiate database in content DB handler
-            mContentListDBHandlerObj = ContentListDBHandler()
+            //mContentListDBHandlerObj = ContentListDBHandler()
             
             // save the Content Info data in database
             
             // write a query to create Table data base
-            let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT)"
+            //let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT)"
             
             // write a query to insert content info data in database
-            let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath) VALUES('\(temObj.mContentID!)','\((temObj.mConrollerContentTitle)!)','\((temObj.mControllerContentImagePath)!)')"
+            //let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath) VALUES('\(temObj.mContentID!)','\((temObj.mConrollerContentTitle)!)','\((temObj.mControllerContentImagePath)!)')"
             
             // pass these queries to DBHandler to save ContentInfoData
-            mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
+            //mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
             
             // append this contentListInfo array
             mControllerContentInfoArray.append(temObj)
@@ -151,10 +146,18 @@ class ContentListController
     }
     
     //  populate model & get model object from controller
-    func populateContentListDetails (contentViewJSONArray : NSMutableArray)
+    func populateContentListDetails ()
+    {
+        // make rest call for content view details from json
+        mRestServiceHandlerOfContentList!.populateViewDetailsData(self)
+
+    }
+    
+    //  populate model & get model object from controller
+    func populateContentListDetails (contentListViewJsonArray : NSMutableArray)
     {
         // set & get content list view details data model object
-        for count in contentViewJSONArray
+        for count in contentListViewJsonArray
         {
             let DictObj = contentViewListDataModel(JSONContentInfoElement: count as! NSDictionary)
             
@@ -162,18 +165,18 @@ class ContentListController
             let temObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants)
             
             // initiate database in contentDB handler
-            mContentListDBHandlerObj = ContentListDBHandler()
+            //mContentListDBHandlerObj = ContentListDBHandler()
             
             // save the Content Info data in database
             
             // write a query to create Table data base
-            let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
+            //let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
             
             // write a query to insert content info data in database
-            let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(temObj.mContentID!),'\((temObj.mControllerContentAction)!)','\((temObj.mControllerContentLastSeen)!)' , \(temObj.mControllerContentTotalViews!) , \(temObj.mControllerContentTotalParticipants!) )"
+            //let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(temObj.mContentID!),'\((temObj.mControllerContentAction)!)','\((temObj.mControllerContentLastSeen)!)' , \(temObj.mControllerContentTotalViews!) , \(temObj.mControllerContentTotalParticipants!) )"
             
             // pass these queries to DBHandler to save ContentInfoData
-            mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
+            //mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
             
             // append this contentListInfo array
             mControllerContentViewsDetailsArray.append(temObj)
@@ -186,7 +189,28 @@ class ContentListController
         return (mControllerContentInfoArray , mControllerContentViewsDetailsArray)
     }
     
-    
-    
 
+    // protocol to implement callback from contentListInfo
+//    func updateControllerListModel(JsonContentInfo : NSMutableArray)
+//    {
+//      self.populateContentInfoData(JsonContentInfo)
+//    }
+//    
+//    // protocol to implement callback from contentListView
+//    func updateControllerViewModel(JsonContentView : NSMutableArray , contentListViewModelUpdater : PContentListInformerToViewModel)
+//    {
+//        self.populateContentListDetails(JsonContentView)
+//        contentListViewModelUpdater.updateViewModelContentListInformer() // call protocol in view model
+//    }
+    
+    func updateControllerListModel(JsonContentInfo : NSMutableArray)
+    {
+       self.populateContentInfoData(JsonContentInfo)
+    }
+    
+    func updateControllerViewModel(JsonContentView : NSMutableArray)
+    {
+        self.populateContentListDetails(JsonContentView)
+        mContentViewModelListener!.updateViewModelContentListInformer()
+    }
 }

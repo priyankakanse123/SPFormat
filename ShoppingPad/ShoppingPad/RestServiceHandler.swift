@@ -13,22 +13,23 @@
 
 import UIKit
 
+
 class RestServiceHandler {
     
     // declare unit test variable which tells the mode of the operation to the compiler
-    let mUntiTest : Bool = true
+    let mUntiTest : Bool = false // change
     
     //declare an array 
     var sampleInfoArray = NSMutableArray ()
     
     // Rest URL string
-    var URLString : String = "http://52.90.50.117:3046/api/v1/user_content_view"
-    
+    var URLStringContentInfo : String = "http://52.90.50.117:3046/api/v1/user_content_view"
+
     // Declare Json Info array
     var mJSONArrayInfo = NSMutableArray()
     
     // Declare Json Content array
-     var mJSONArrayViews = NSMutableArray()
+    var mJSONArrayViews = NSMutableArray()
     
     init()
     {
@@ -40,22 +41,57 @@ class RestServiceHandler {
             self.populateDummyContentViewJson()
        }
         
-        // execute if the compiler is not in test mode
-        else
-       {
-            // populate json from server
-            self.populateViewDetailsData(URLString)
-        }
+       
     }
     
     
-    // get JSON from server
-    func populateViewDetailsData (URL : String)
+    // get content info JSON from server
+    func populateViewDetailsData (contentListViewListener : PContentListListener)
     {
      // call the json from server
-        
+        var json : NSMutableArray?
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://52.90.50.117:3046/api/v1/content_info")!, completionHandler: { (data, response, error) -> Void in
+            // Check if data was received successfully
+            if error == nil && data != nil {
+                do {
+                    // Convert NSData to Dictionary where keys are of type String, and values are of any type
+                    self.mJSONArrayViews = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSMutableArray
+                    // Access specific key with value of type String
+                    let Dict = self.mJSONArrayViews [1]
+                    print (Dict)
+                    
+                    // send call back to controller
+                    contentListViewListener.updateControllerListModel(self.mJSONArrayViews)
+                } catch {
+                    // Something went wrong
+                }
+            }
+        }).resume()
     }
     
+    // populate content list info
+    func populateContenInfoDta (ContentListInfoDataListener : PContentListListener)
+    {
+        // call the json from server
+        
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://52.90.50.117:3046/api/v1/user_content_view")!, completionHandler: { (data, response, error) -> Void in
+            // Check if data was received successfully
+            if error == nil && data != nil {
+                do {
+                    // Convert NSData to Dictionary where keys are of type String, and values are of any type
+                    self.mJSONArrayInfo = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSMutableArray
+                    
+                    
+                    // send call back to controller
+                    ContentListInfoDataListener.updateControllerViewModel(self.mJSONArrayInfo)
+                    
+                } catch {
+                    // Something went wrong
+                }
+            }
+        }).resume()
+    }
+
     // populate content info JSONArray with dummy data
     func populateDummyContentInfoJson ()
     {
@@ -70,6 +106,8 @@ class RestServiceHandler {
     
     func getJSONArray () -> (infoJSON : NSMutableArray , viewJson : NSMutableArray)
     {
+        print("mJSONArrayInfo" , mJSONArrayInfo )
+        print("mJSONArraycontentviews" , mJSONArrayViews)
         return (mJSONArrayInfo , mJSONArrayViews)
     }
 }

@@ -16,7 +16,7 @@
 
 
 
-struct ContentViewModel {
+struct ContentViewModel  {
     
     // Attributes of individual contentListModel
     var mContentImagePath : String? //image icon
@@ -28,7 +28,7 @@ struct ContentViewModel {
     
 }
 
-class ContentListViewModel {
+class ContentListViewModel : PContentListInformerToViewModel {
     
     // Object of ContentListViewController
     var mConteListControllerObj : ContentListViewController?
@@ -42,11 +42,10 @@ class ContentListViewModel {
     //object of ContentListController
     var mContentListControllerObject : ContentListController?
     
-    init()
+    var mContentListViewObserver : ContentListViewObserver?
+    
+    init(contentListViewObserver : ContentListViewObserver)
     {
-        //check whether contentListArray is empty or not
-        if mListOfContents.count == 0
-        {
             //check whether project is running in test mode or not
             if (mTestVariable == true)
             {
@@ -55,22 +54,23 @@ class ContentListViewModel {
                 //call populateData method
                 self.populateDummyData()
             }
-            else
-            {
-                //populate data from controller
-                populateContentListData()
+            else {
+                mContentListViewObserver = contentListViewObserver
+                // init controller object
+                mContentListControllerObject = ContentListController(contentViewModelListener: self)
             }
-
-        }
     }
     
     
     //Populate contentInfoList with Data from controller
     func populateContentListData()
     {
+        // populate content info data method from controller
+        mContentListControllerObject!.PopulateContentInfoData()
         
-        // init controller object
-        mContentListControllerObject = ContentListController()
+        // populate content view data from controller
+        mContentListControllerObject!.populateContentListDetails()
+        
         
         // get all content data from controller
         let contentArray = mContentListControllerObject!.getContentDataArrays(0)
@@ -125,7 +125,13 @@ class ContentListViewModel {
         return mListOfContents.count
     }
     
-    
+    // call back content list view
+    func updateViewModelContentListInformer()
+    {
+       self.populateContentListData()
+        
+    }
+
 }
 
 

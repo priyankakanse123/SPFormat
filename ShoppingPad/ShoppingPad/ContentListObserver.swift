@@ -15,6 +15,6 @@ import UIKit
 
 protocol ContentListViewObserver
 {
-    
+   func updateContentListViewModel()
 }
 

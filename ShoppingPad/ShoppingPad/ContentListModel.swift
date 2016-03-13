@@ -93,9 +93,9 @@ class contentInfoDataListModel
     init(JSONContentInfoElement : NSDictionary)
     {
         // set content list info model
-        mModelContentID = Int(JSONContentInfoElement.objectForKey("ContentID") as! NSNumber)
-        mModelContentImagePath = (JSONContentInfoElement.objectForKey("ImagePath")! as! String)
-        mModelContentTitle = (JSONContentInfoElement.objectForKey("Title")! as! String)
+        mModelContentID = Int(JSONContentInfoElement.objectForKey("content_id") as! NSNumber)
+        //mModelContentImagePath = (JSONContentInfoElement.objectForKey("imagesLink")! as! String)
+        mModelContentTitle = (JSONContentInfoElement.objectForKey("display_name")! as! String)
     }
 }
 
@@ -113,11 +113,11 @@ class contentViewListDataModel
     init(JSONContentInfoElement : NSDictionary)
     {
         // set contents view details data model
-        mModelContentID = Int(JSONContentInfoElement.objectForKey("ContentID") as! NSNumber)
-        mModelContentAction = JSONContentInfoElement.objectForKey("ContentAction") as! String
-        mModelContentLastSeen = JSONContentInfoElement.objectForKey("LastSeen") as! String
-        mModelContentTotalParticipants = Int(JSONContentInfoElement.objectForKey("TotalViews") as! NSNumber)
-        mModelContentTotalViews = Int(JSONContentInfoElement.objectForKey("TotalViews") as! NSNumber)
+        mModelContentID = Int(JSONContentInfoElement.objectForKey("content_id") as! NSNumber)
+        //mModelContentAction = JSONContentInfoElement.objectForKey("lastName") as! String
+        //mModelContentLastSeen = JSONContentInfoElement.objectForKey("lastViewedDateTime") as! String
+        mModelContentTotalParticipants = Int(JSONContentInfoElement.objectForKey("numberOfViews") as! NSNumber)
+        mModelContentTotalViews = Int(JSONContentInfoElement.objectForKey("numberOfViews") as! NSNumber)
     }
 }
 
