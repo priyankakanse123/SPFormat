@@ -17,8 +17,9 @@ import UIKit
 
 class ContentListViewController: UIViewController , ContentListViewObserver , UITableViewDataSource , UITableViewDelegate
 {
-   // @IBOutlet weak var tableView: UITableView!
-    
+   
+    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
+   
     
     
     //? means either the value of viewModelObj is nil or intializing afterwords
@@ -27,22 +28,31 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     //contentListArray
     var mContentList = NSArray()
     
-    
+    // outlet of tableview
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        // start animating activity indicator
+        mActivityIndicator.startAnimating()
+        
         // Call viewModel to populate the Data needed for UI
         mViewModelObj = ContentListViewModel(contentListViewObserver: self)
         
-        //
+       
         
-        // Populating the Content List in an Async Thread
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        
+        
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.mViewModelObj!.populateContentListData()
-           //print("print" , self.mViewModelObj!.getContentInfo(0))
-        });
+        
+        
+        //set an imageView
+                 
+//        })
     }
     
     
@@ -134,7 +144,13 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     // reload tableview 
     func updateContentListViewModel()
     {
-        self.loadView()
+        //self.loadView()
+        print("count" , mViewModelObj!.getContentInfoCount())
+        tableView.reloadData()
+        
+        // remove activity indicator
+        mActivityIndicator.hidden = true
+       
     }
     
     

@@ -23,7 +23,7 @@ class RestServiceHandler {
     var sampleInfoArray = NSMutableArray ()
     
     // Rest URL string
-    var URLStringContentInfo : String = "http://52.90.50.117:3046/api/v1/user_content_view"
+    var URLStringContentInfo : String = "http://54.165.130.78:3000/api/v4/usercontentview"
 
     // Declare Json Info array
     var mJSONArrayInfo = NSMutableArray()
@@ -44,13 +44,19 @@ class RestServiceHandler {
        
     }
     
+    func popData()
+    {
+        
+    }
+    
     
     // get content info JSON from server
     func populateViewDetailsData (contentListViewListener : PContentListListener)
     {
-     // call the json from server
-        var json : NSMutableArray?
-        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://52.90.50.117:3046/api/v1/content_info")!, completionHandler: { (data, response, error) -> Void in
+        
+        
+        // call the json from server
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://54.165.130.78:3000/api/v4/usercontentview")!, completionHandler: { (data, response, error) -> Void in
             // Check if data was received successfully
             if error == nil && data != nil {
                 do {
@@ -61,20 +67,22 @@ class RestServiceHandler {
                     print (Dict)
                     
                     // send call back to controller
-                    contentListViewListener.updateControllerListModel(self.mJSONArrayViews)
+                    contentListViewListener.updateControllerViewModel(self.mJSONArrayViews)
                 } catch {
                     // Something went wrong
                 }
             }
         }).resume()
+        
     }
     
     // populate content list info
     func populateContenInfoDta (ContentListInfoDataListener : PContentListListener)
     {
+        
         // call the json from server
         
-        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://52.90.50.117:3046/api/v1/user_content_view")!, completionHandler: { (data, response, error) -> Void in
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://54.165.130.78:3000/api/v4/contentinfo")!, completionHandler: { (data, response, error) -> Void in
             // Check if data was received successfully
             if error == nil && data != nil {
                 do {
@@ -83,13 +91,15 @@ class RestServiceHandler {
                     
                     
                     // send call back to controller
-                    ContentListInfoDataListener.updateControllerViewModel(self.mJSONArrayInfo)
+                    ContentListInfoDataListener.updateControllerListModel(self.mJSONArrayInfo)
                     
                 } catch {
                     // Something went wrong
                 }
             }
         }).resume()
+            
+        
     }
 
     // populate content info JSONArray with dummy data

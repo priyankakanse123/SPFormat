@@ -110,14 +110,14 @@ class contentViewListDataModel
     var mModelContentTotalParticipants = Int()
     
     // set all the contentInfo Model Data
-    init(JSONContentInfoElement : NSDictionary)
+    init(JSONContentViewElement : NSDictionary)
     {
         // set contents view details data model
-        mModelContentID = Int(JSONContentInfoElement.objectForKey("content_id") as! NSNumber)
-        //mModelContentAction = JSONContentInfoElement.objectForKey("lastName") as! String
+        mModelContentID = Int(JSONContentViewElement.objectForKey("contentId") as! NSNumber)
+        mModelContentAction = JSONContentViewElement.objectForKey("action") as! String
         //mModelContentLastSeen = JSONContentInfoElement.objectForKey("lastViewedDateTime") as! String
-        mModelContentTotalParticipants = Int(JSONContentInfoElement.objectForKey("numberOfViews") as! NSNumber)
-        mModelContentTotalViews = Int(JSONContentInfoElement.objectForKey("numberOfViews") as! NSNumber)
+        mModelContentTotalParticipants = Int(JSONContentViewElement.objectForKey("numberOfViews") as! NSNumber)
+        mModelContentTotalViews = Int(JSONContentViewElement.objectForKey("numberofparticipant") as! NSNumber)
     }
 }
 

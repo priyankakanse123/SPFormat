@@ -33,6 +33,7 @@
 		0A5F97131C8C52B900E6B316 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F97121C8C52B900E6B316 /* CustomViewCell.swift */; };
 		0A5F97161C8C6B7800E6B316 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F97151C8C6B7800E6B316 /* Utility.swift */; };
 		0A5F971B1C8D374500E6B316 /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5F971A1C8D374500E6B316 /* shareIcon.png */; };
+		0AFAD6941C998FC400135399 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0AFAD6931C998FC400135399 /* loading.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		0A5F97121C8C52B900E6B316 /* CustomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
 		0A5F97151C8C6B7800E6B316 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		0A5F971A1C8D374500E6B316 /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
+		0AFAD6931C998FC400135399 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +281,7 @@
 		0A5F97191C8D365600E6B316 /* ShoppingPadMedia */ = {
 			isa = PBXGroup;
 			children = (
+				0AFAD6931C998FC400135399 /* loading.gif */,
 				0A5F97101C8C509800E6B316 /* imagePath.jpeg */,
 				0A5F971A1C8D374500E6B316 /* shareIcon.png */,
 			);
@@ -395,6 +398,7 @@
 				0A5F96D61C8BF3C000E6B316 /* LaunchScreen.storyboard in Resources */,
 				0A5F97111C8C509800E6B316 /* imagePath.jpeg in Resources */,
 				0A5F96D31C8BF3C000E6B316 /* Assets.xcassets in Resources */,
+				0AFAD6941C998FC400135399 /* loading.gif in Resources */,
 				0A5F971B1C8D374500E6B316 /* shareIcon.png in Resources */,
 				0A5F96CE1C8BF3C000E6B316 /* Main.storyboard in Resources */,
 			);

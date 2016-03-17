@@ -1,4 +1,4 @@
-//
+		//
 //  ContentListController.swift
 //  ShoppingPad
 //  
@@ -44,6 +44,7 @@ class ContentListController : PContentListListener
     // create object of content DBHandler
     var mContentListDBHandlerObj : ContentListDBHandler?
     
+    // protocol of view model
     var mContentViewModelListener : PContentListInformerToViewModel?
     
     // create object of Model Class
@@ -159,24 +160,24 @@ class ContentListController : PContentListListener
         // set & get content list view details data model object
         for count in contentListViewJsonArray
         {
-            let DictObj = contentViewListDataModel(JSONContentInfoElement: count as! NSDictionary)
+            let DictObj = contentViewListDataModel(JSONContentViewElement: count as! NSDictionary)
             
             // set contentList view controller's attributes
             let temObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants)
             
             // initiate database in contentDB handler
-            //mContentListDBHandlerObj = ContentListDBHandler()
+            mContentListDBHandlerObj = ContentListDBHandler()
             
             // save the Content Info data in database
             
             // write a query to create Table data base
-            //let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
+            let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
             
             // write a query to insert content info data in database
-            //let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(temObj.mContentID!),'\((temObj.mControllerContentAction)!)','\((temObj.mControllerContentLastSeen)!)' , \(temObj.mControllerContentTotalViews!) , \(temObj.mControllerContentTotalParticipants!) )"
+            let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(temObj.mContentID!),'\((temObj.mControllerContentAction)!)','\((temObj.mControllerContentLastSeen)!)' , \(temObj.mControllerContentTotalViews!) , \(temObj.mControllerContentTotalParticipants!) )"
             
             // pass these queries to DBHandler to save ContentInfoData
-            //mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
+            mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
             
             // append this contentListInfo array
             mControllerContentViewsDetailsArray.append(temObj)

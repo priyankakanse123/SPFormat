@@ -71,7 +71,10 @@ class ContentListViewModel : PContentListInformerToViewModel {
         // populate content view data from controller
         mContentListControllerObject!.populateContentListDetails()
         
-        
+    }
+    
+    func populateContentListFromController()
+    {
         // get all content data from controller
         let contentArray = mContentListControllerObject!.getContentDataArrays(0)
         
@@ -96,6 +99,13 @@ class ContentListViewModel : PContentListInformerToViewModel {
                             
                             // append setObj in the listOfContents array
                             mListOfContents.append(setObj)
+                            
+                            print("done")
+                            
+                            // update the observer pattern
+                           
+                            
+                            
                         }
                 }
         }
@@ -128,8 +138,10 @@ class ContentListViewModel : PContentListInformerToViewModel {
     // call back content list view
     func updateViewModelContentListInformer()
     {
-       self.populateContentListData()
+        self.populateContentListFromController()
         
+        // update observer pattern
+        mContentListViewObserver!.updateContentListViewModel()
     }
 
 }
