@@ -47,9 +47,6 @@ class ContentListController : PContentListListener
     // protocol of view model
     var mContentViewModelListener : PContentListInformerToViewModel?
     
-    // create object of Model Class
-    var mModel = ContentListModel()
-
     // create an empty array to store content info data
     var mControllerContentInfoArray = [ContentInfo]()
     

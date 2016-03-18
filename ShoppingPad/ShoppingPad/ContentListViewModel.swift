@@ -142,6 +142,8 @@ class ContentListViewModel : PContentListInformerToViewModel {
         
         // update observer pattern
         mContentListViewObserver!.updateContentListViewModel()
+        
+        
     }
 
 }

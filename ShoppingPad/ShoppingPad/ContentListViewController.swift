@@ -17,53 +17,44 @@ import UIKit
 
 class ContentListViewController: UIViewController , ContentListViewObserver , UITableViewDataSource , UITableViewDelegate
 {
-   
+    // create outlet of of activity indicator
     @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
-   
-    
-    
-    //? means either the value of viewModelObj is nil or intializing afterwords
-    var mViewModelObj : ContentListViewModel?
-    
-    //contentListArray
-    var mContentList = NSArray()
     
     // outlet of tableview
     @IBOutlet weak var tableView: UITableView!
-
+    
+    //? means either the value of viewModelObj is nil or intializing afterwords
+    // create object of ContentListViewModel object
+    var mViewModelObj : ContentListViewModel?
+    
+    //define an empty array contentListArray
+    var mContentList = NSArray()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+    
         // start animating activity indicator
         mActivityIndicator.startAnimating()
         
         // Call viewModel to populate the Data needed for UI
         mViewModelObj = ContentListViewModel(contentListViewObserver: self)
         
-       
-        
-        
-        
-        
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.mViewModelObj!.populateContentListData()
-        
-        
-        //set an imageView
-                 
-//        })
+        // call the method populateModel method which is inside contentList
+        self.mViewModelObj!.populateContentListData()
     }
     
     
     
     // Return number of sections in tableView
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 1
     }
     
     // Return number of rows in tableView
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return mViewModelObj!.getContentInfoCount()
     }
     
@@ -75,12 +66,17 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         
         //make imageView Round
         Utility().RoundImageView(cell.mContentCellImageView!)
-        
+    
         //fetch the cell object from View
         let cellObjectToDisplay = mViewModelObj!.getContentInfo(indexPath.row)
         
+        // load image from url
+        let cellImage = Utility().callImageURL(cellObjectToDisplay.mContentImagePath!)
+        
         // set content icon
-        cell.mContentCellImageView.image = UIImage(named: (cellObjectToDisplay.mContentImagePath)!)
+        cell.mContentCellImageView.image = cellImage
+        
+        print("imagePath" , (cellObjectToDisplay.mContentImagePath)!)
         
         // set content Title
         cell.mContentCellTitleLabel.text = cellObjectToDisplay.mContentTitle!
@@ -102,7 +98,8 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     }
     
     // set tableViewCell height
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
         return 60
     }
     
@@ -150,19 +147,10 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         
         // remove activity indicator
         mActivityIndicator.hidden = true
-       
+        
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func textViewDidChange(textView: UITextView) { //Handle the text changes here
+        print(textView.text); //the textView parameter is the textView where text was changed
     }
-    */
-
 }
