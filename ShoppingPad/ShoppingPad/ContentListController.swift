@@ -62,6 +62,9 @@ class ContentListController : PContentListListener
         // call the constructor of REST handler
         mRestServiceHandlerOfContentList = RestServiceHandler()
         
+        // call the constructor of model
+         mContentListDBHandlerObj = ContentListDBHandler()
+        
         if (mUnitTestVariale)
         {
             // call ContentInfo data
@@ -70,7 +73,9 @@ class ContentListController : PContentListListener
             // call ContentViewData method
             self.setDummyContentViewDetails()
         }
-        else {
+        else
+        {
+            // set ContentViewModelListner protocols object
             mContentViewModelListener = contentViewModelListener
         }
     }
@@ -105,6 +110,7 @@ class ContentListController : PContentListListener
         
     }
     
+    
     //  populate model & get model object from controller
     func PopulateContentInfoData()
     {
@@ -124,19 +130,8 @@ class ContentListController : PContentListListener
             // set contentList controller's attributes
             let temObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath)
             
-            // initiate database in content DB handler
-            //mContentListDBHandlerObj = ContentListDBHandler()
-            
             // save the Content Info data in database
-            
-            // write a query to create Table data base
-            //let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT)"
-            
-            // write a query to insert content info data in database
-            //let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath) VALUES('\(temObj.mContentID!)','\((temObj.mConrollerContentTitle)!)','\((temObj.mControllerContentImagePath)!)')"
-            
-            // pass these queries to DBHandler to save ContentInfoData
-            //mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
+            mContentListDBHandlerObj!.saveContentListInfoData(temObj.mContentID!, contentTitle: temObj.mConrollerContentTitle!, contentImagePath: temObj.mControllerContentImagePath!)
             
             // append this contentListInfo array
             mControllerContentInfoArray.append(temObj)
@@ -162,19 +157,9 @@ class ContentListController : PContentListListener
             // set contentList view controller's attributes
             let temObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants)
             
-            // initiate database in contentDB handler
-            mContentListDBHandlerObj = ContentListDBHandler()
             
             // save the Content Info data in database
-            
-            // write a query to create Table data base
-            let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
-            
-            // write a query to insert content info data in database
-            let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(temObj.mContentID!),'\((temObj.mControllerContentAction)!)','\((temObj.mControllerContentLastSeen)!)' , \(temObj.mControllerContentTotalViews!) , \(temObj.mControllerContentTotalParticipants!) )"
-            
-            // pass these queries to DBHandler to save ContentInfoData
-            mContentListDBHandlerObj?.saveContentListInfoData( createTableQuery, insertContentInfoQuery: insertDataQuery)
+            mContentListDBHandlerObj!.saveContentListViewData(temObj.mContentID!, contentAction: temObj.mControllerContentAction!, contentLastSenn: temObj.mControllerContentLastSeen!, contentTotalViews: temObj.mControllerContentTotalViews!, contentTotalParticipants: temObj.mControllerContentTotalParticipants!)
             
             // append this contentListInfo array
             mControllerContentViewsDetailsArray.append(temObj)
@@ -188,26 +173,19 @@ class ContentListController : PContentListListener
     }
     
 
-    // protocol to implement callback from contentListInfo
-//    func updateControllerListModel(JsonContentInfo : NSMutableArray)
-//    {
-//      self.populateContentInfoData(JsonContentInfo)
-//    }
-//    
-//    // protocol to implement callback from contentListView
-//    func updateControllerViewModel(JsonContentView : NSMutableArray , contentListViewModelUpdater : PContentListInformerToViewModel)
-//    {
-//        self.populateContentListDetails(JsonContentView)
-//        contentListViewModelUpdater.updateViewModelContentListInformer() // call protocol in view model
-//    }
-    
+   
+   // implement protocol methods (callback)
     func updateControllerListModel(JsonContentInfo : NSMutableArray)
     {
-       self.populateContentInfoData(JsonContentInfo)
+        // populate content info method
+        self.populateContentInfoData(JsonContentInfo)
+        mContentViewModelListener!.updateViewModelContentListInformer()
     }
     
+    // implement protocol method (call back)
     func updateControllerViewModel(JsonContentView : NSMutableArray)
     {
+        // populate content view details method
         self.populateContentListDetails(JsonContentView)
         mContentViewModelListener!.updateViewModelContentListInformer()
     }

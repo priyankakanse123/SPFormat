@@ -45,7 +45,7 @@ class ContentListDBHandler {
     }
     
     // save the data into the database
-    func saveContentListInfoData(createTableQuery : String , insertContentInfoQuery : String)
+    func saveData(createTableQuery : String , insertContentInfoQuery : String)
     {
         let contentDB = FMDatabase(path : mDatabasePath as String)
         print("database Path" , mDatabasePath)
@@ -94,5 +94,29 @@ class ContentListDBHandler {
         
     }
     
+    // save contentList info data in the table 
+    func saveContentListInfoData(contentID : Int , contentTitle : String , contentImagePath : String)
+    {
+        // write a query to check whether table exist or not and if not then create a table
+        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT)"
+        
+        // write a query to insert content info data in database
+        let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath) VALUES('\(contentID)','\((contentTitle))','\((contentImagePath))')"
+        
+        // save the database in local database
+        self.saveData(createTableQuery, insertContentInfoQuery: insertDataQuery)
+        
 
+    }
+    
+    func saveContentListViewData(contentID : Int , contentAction : String , contentLastSenn : String , contentTotalViews : Int , contentTotalParticipants : Int)
+    {
+        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
+        
+        // write a query to insert content info data in database
+        let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(contentID),'\((contentAction))','\((contentLastSenn))' , \(contentTotalViews) , \(contentTotalParticipants) )"
+        
+        // save the data in local database
+        self.saveData(createTableQuery, insertContentInfoQuery: insertDataQuery)
+    }
 }

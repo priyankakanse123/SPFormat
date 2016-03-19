@@ -12,15 +12,15 @@ class CustomViewCell: UITableViewCell {
     
     
     //TableViewcell atributes
-    @IBOutlet weak var mContentCellImageView: UIImageView!  // content image
+    @IBOutlet weak var mContentCellImageView: UIImageView!      // content image
     
-    @IBOutlet weak var mContentCellTitleLabel: UILabel!     // content title
+    @IBOutlet weak var mContentCellTitleLabel: UILabel!         // content title
     
-    @IBOutlet weak var mContentCellViewAction: UILabel!     // content action
+    @IBOutlet weak var mContentCellViewAction: UILabel!         // content action
     
-    @IBOutlet weak var mContentCellLastSeen: UILabel!       // content last seen
+    @IBOutlet weak var mContentCellLastSeen: UILabel!           // content last seen
 
-    @IBOutlet weak var mContentCellTotalViews: UILabel!     // content total views
+    @IBOutlet weak var mContentCellTotalViews: UILabel!         // content total views
     
     @IBOutlet weak var mContentCellTotalParticipants: UILabel!  // total participants of 
     

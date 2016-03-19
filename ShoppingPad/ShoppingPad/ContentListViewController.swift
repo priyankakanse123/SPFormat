@@ -30,6 +30,12 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     //define an empty array contentListArray
     var mContentList = NSArray()
     
+    // create an empty object of custom cell
+    var mCustomCell : CustomViewCell?
+    
+    // create an object of ContentViewModel Structure
+    var mContentViewModel : ContentViewModel?
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -38,10 +44,23 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         mActivityIndicator.startAnimating()
         
         // Call viewModel to populate the Data needed for UI
-        mViewModelObj = ContentListViewModel(contentListViewObserver: self)
+        self.mViewModelObj = ContentListViewModel(contentListViewObserver: self)
         
-        // call the method populateModel method which is inside contentList
-        self.mViewModelObj!.populateContentListData()
+        // initialize custom view cell with emty object
+        mCustomCell = CustomViewCell()
+
+        // define background thread
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            print("This is run on the background queue")
+            
+            // call the method populateModel method which is inside contentList
+            self.mViewModelObj!.populateContentListData()
+
+            })
+
+        
     }
     
     
@@ -62,38 +81,36 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         //create object of customViewCell
-        let cell = tableView.dequeueReusableCellWithIdentifier("CustomViewCell") as! CustomViewCell
+        mCustomCell = tableView.dequeueReusableCellWithIdentifier("CustomViewCell") as? CustomViewCell
         
         //make imageView Round
-        Utility().RoundImageView(cell.mContentCellImageView!)
+        Utility().RoundImageView(mCustomCell!.mContentCellImageView!)
     
         //fetch the cell object from View
         let cellObjectToDisplay = mViewModelObj!.getContentInfo(indexPath.row)
         
-        // load image from url
-        let cellImage = Utility().callImageURL(cellObjectToDisplay.mContentImagePath!)
-        
-        // set content icon
-        cell.mContentCellImageView.image = cellImage
-        
-        print("imagePath" , (cellObjectToDisplay.mContentImagePath)!)
+//        // load image from url
+//        let cellImage = Utility().callImageURL(cellObjectToDisplay.mContentImagePath!)
+//        
+//        // set content icon
+//        mCustomCell!.mContentCellImageView.image = cellImage
         
         // set content Title
-        cell.mContentCellTitleLabel.text = cellObjectToDisplay.mContentTitle!
+        mCustomCell!.mContentCellTitleLabel.text = cellObjectToDisplay.mContentTitle.value
         
         // set content action
-        cell.mContentCellViewAction.text = (cellObjectToDisplay.mActionPerformed!)
+        mCustomCell!.mContentCellViewAction.text = (cellObjectToDisplay.mActionPerformed.value)
         
         // set total number of views of the content
-        cell.mContentCellTotalViews.text = String(cellObjectToDisplay.mTotalViews!) + " views"
+        mCustomCell!.mContentCellTotalViews.text = String(cellObjectToDisplay.mTotalViews.value) + " views"
         
         // set total number of participants
-        cell.mContentCellTotalParticipants.text = String(cellObjectToDisplay.mTotalParticipants!) + " participants"
+        mCustomCell!.mContentCellTotalParticipants.text = String(cellObjectToDisplay.mTotalParticipants.value) + " participants"
         
         //set last seen of the content
-        cell.mContentCellLastSeen.text = cellObjectToDisplay.mLastViewTime!
+       mCustomCell!.mContentCellLastSeen.text = cellObjectToDisplay.mLastViewTime.value
         
-        return cell
+        return mCustomCell!
         
     }
     
@@ -143,14 +160,27 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     {
         //self.loadView()
         print("count" , mViewModelObj!.getContentInfoCount())
-        tableView.reloadData()
         
-        // remove activity indicator
-        mActivityIndicator.hidden = true
-        
+        dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+            
+            // reload tableView
+            self.tableView.reloadData()
+            
+            // remove activity indicator
+            self.mActivityIndicator.hidden = true
+
+        }
     }
     
-    func textViewDidChange(textView: UITextView) { //Handle the text changes here
-        print(textView.text); //the textView parameter is the textView where text was changed
+    // bind the data of view controller to view model
+    func bindData()
+    {
+        mContentViewModel!.mContentTitle.bindTo(mCustomCell!.mContentCellTitleLabel)
+        mContentViewModel!.mActionPerformed.bindTo(mCustomCell!.mContentCellViewAction)
+        mContentViewModel!.mLastViewTime.bindTo(mCustomCell!.mContentCellLastSeen)
+        
+        
+        (mContentViewModel!.mTotalParticipants).bindTo(mCustomCell!.mContentCellTotalViews)
+        mContentViewModel!.mTotalViews.bindTo(mCustomCell!.mContentCellTotalViews)
     }
 }

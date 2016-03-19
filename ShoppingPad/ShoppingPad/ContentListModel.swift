@@ -46,7 +46,7 @@ class contentViewListDataModel
         // set contents view details data model
         mModelContentID = Int(JSONContentViewElement.objectForKey("contentId") as! NSNumber)
         mModelContentAction = JSONContentViewElement.objectForKey("action") as! String
-        //mModelContentLastSeen = JSONContentInfoElement.objectForKey("lastViewedDateTime") as! String
+        mModelContentLastSeen = JSONContentViewElement.objectForKey("lastViewedDateTime") as! String
         mModelContentTotalParticipants = Int(JSONContentViewElement.objectForKey("numberOfViews") as! NSNumber)
         mModelContentTotalViews = Int(JSONContentViewElement.objectForKey("numberofparticipant") as! NSNumber)
     }
