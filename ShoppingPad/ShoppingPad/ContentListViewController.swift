@@ -5,9 +5,9 @@
 //  Purpose : 
 //  1)It is main UIClass & holds IBOutlet & IBActions of UI
 //  2)It will listen to all UIActions
-//  3)It implements observer pattern & change the state of vie
+//  3)It implements observer pattern & change the state of view
 //  4)It holds the ContentListViewModel & inform the changes to the observer class
-//  5)This is the View of MVVM design pattern
+//  5)This is the Content List View of MVVM design pattern
 //
 //  Created by BridgeLabz on 06/03/16.
 //  Copyright © 2016 BridgeLabz. All rights reserved.
@@ -35,11 +35,22 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     
     // create an object of ContentViewModel Structure
     var mContentViewModel : ContentViewModel?
+    
+    // create object of utility class
+    var mUtility = Utility()
+    
+    // crate variable saving content_id
+    var mContent_id : Int?
 
+    // create variable used to store content_link
+    var mContentLink : String?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    
+        
+        navigationController?.navigationBarHidden = true
+        
         // start animating activity indicator
         mActivityIndicator.startAnimating()
         
@@ -57,6 +68,8 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
             
             // call the method populateModel method which is inside contentList
             self.mViewModelObj!.populateContentListData()
+            
+            self.bindData()
 
             })
 
@@ -80,6 +93,7 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     // Set Cell values of the tableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        
         //create object of customViewCell
         mCustomCell = tableView.dequeueReusableCellWithIdentifier("CustomViewCell") as? CustomViewCell
         
@@ -89,11 +103,11 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         //fetch the cell object from View
         let cellObjectToDisplay = mViewModelObj!.getContentInfo(indexPath.row)
         
-//        // load image from url
-//        let cellImage = Utility().callImageURL(cellObjectToDisplay.mContentImagePath!)
-//        
-//        // set content icon
-//        mCustomCell!.mContentCellImageView.image = cellImage
+        // load image from url
+        //let cellImage = mUtility.callImageURL(cellObjectToDisplay.mContentImagePath.value)
+        
+        // set content icon
+        //self.mCustomCell!.mContentCellImageView.image = cellImage
         
         // set content Title
         mCustomCell!.mContentCellTitleLabel.text = cellObjectToDisplay.mContentTitle.value
@@ -145,10 +159,32 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     // Select tableView Row // Title Selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        self.showAlerView("Title Selected")
+        
+        let cellObjectToDisplay = mViewModelObj!.getContentInfo(indexPath.row)
+        
+        
+        // set the parameter of the contents
+        mContent_id = cellObjectToDisplay.mContentID.value
+        mContentLink = cellObjectToDisplay.mContentLink
+        
+        // call the segue to open view content screen
+        self.performSegueWithIdentifier("showViewContent", sender: nil)
     }
     
-   
+    // send data through segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if(segue.identifier == "showViewContent")
+        {
+            // create object of view content controller
+            let viewContentControllerObj = segue.destinationViewController as! ViewContentViewController
+            
+            // pass content link & content_id to view content controller
+            viewContentControllerObj.mContent_ID = mContent_id!
+            viewContentControllerObj.mContentLink = mContentLink!
+        }
+    }
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -175,12 +211,12 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     // bind the data of view controller to view model
     func bindData()
     {
-        mContentViewModel!.mContentTitle.bindTo(mCustomCell!.mContentCellTitleLabel)
-        mContentViewModel!.mActionPerformed.bindTo(mCustomCell!.mContentCellViewAction)
-        mContentViewModel!.mLastViewTime.bindTo(mCustomCell!.mContentCellLastSeen)
+        mContentViewModel?.mContentTitle.bindTo(mCustomCell!.mContentCellTitleLabel)
+        mContentViewModel?.mActionPerformed.bindTo(mCustomCell!.mContentCellViewAction)
+        mContentViewModel?.mLastViewTime.bindTo(mCustomCell!.mContentCellLastSeen)
         
         
-        (mContentViewModel!.mTotalParticipants).bindTo(mCustomCell!.mContentCellTotalViews)
-        mContentViewModel!.mTotalViews.bindTo(mCustomCell!.mContentCellTotalViews)
+        mContentViewModel?.mTotalParticipants.bindTo(mCustomCell!.mContentCellTotalViews)
+        mContentViewModel?.mTotalViews.bindTo(mCustomCell!.mContentCellTotalViews)
     }
 }

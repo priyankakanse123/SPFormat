@@ -5,10 +5,14 @@
 
 target 'ShoppingPad' do
     
-    
+    # install reactive kit for data binding
     pod 'ReactiveKit', '~> 1.0'
     pod 'ReactiveUIKit', '~> 1.0'
     pod 'ReactiveFoundation', '~> 1.0'
+    
+    # install svg kit for reading svg image
+    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    
     
     
 end

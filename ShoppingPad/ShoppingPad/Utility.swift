@@ -11,9 +11,14 @@
 
 import Foundation
 import UIKit
+import MessageUI
 
-class Utility
+
+class Utility : ViewContentViewController, MFMessageComposeViewControllerDelegate
+
 {
+    
+    var num : Bool = false
     // make imageView round
     func RoundImageView (imageView : UIImageView)
     {
@@ -25,12 +30,61 @@ class Utility
         
     }
     
-    // call image from url
+    // call image from within 5 seconds
     func callImageURL(urlString : String) -> UIImage
     {
-        // load image from url
-        let myImage =  UIImage(data: NSData(contentsOfURL: NSURL(string:"https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg")!)!)
+        // define an image
+        var contentImage : UIImage = UIImage(named: "defaultImage.jpg")!
         
-        return myImage!
+        // convert String url to NSURL
+        let url = NSURL(string: urlString)
+        
+        // if url exist
+        if (url != nil)
+        {
+            // fetch the imageData from url
+            let data = NSData(contentsOfURL: url!)
+            
+            // if image data exist
+            if (data != nil)
+            {
+                // convert imagedata back to an image
+                contentImage = UIImage(data: data!)!
+            }
+        }
+            
+        return contentImage
     }
+    
+    // send text message from the mobile phone
+    
+    func sendTextMessage ()
+    {
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Message Body"
+            controller.recipients = ["8652210204"]
+            controller.messageComposeDelegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
+            print("message sent")
+        }
+            
+        else
+        {
+            print("can not send message")
+        }
+  
+    }
+    
+    //... handle sms screen actions
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult)
+    {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    
+    
+   
+    
 }

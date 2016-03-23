@@ -27,6 +27,8 @@ struct ContentViewModel
     var mActionPerformed : Observable <String>  //Action performed by the user
     var mTotalViews : Observable <String>          //Total number of views
     var mTotalParticipants : Observable <String>   //Total number of participants
+    var mContentID : Observable <Int>
+    var mContentLink : String
 }
 
 class ContentListViewModel : PContentListInformerToViewModel {
@@ -100,7 +102,7 @@ class ContentListViewModel : PContentListInformerToViewModel {
                     if (contentInfoArray[i].mContentID == contentViewArray[j].mContentID )
                     {
                         // set object of viewModel with the contentInfo & contentView values
-                        let setObj = ContentViewModel(mContentImagePath: Observable( contentInfoArray[i].mControllerContentImagePath!), mContentTitle:Observable (contentInfoArray[i].mConrollerContentTitle!), mLastViewTime: Observable(contentViewArray[j].mControllerContentLastSeen!), mActionPerformed: Observable(contentViewArray[j].mControllerContentAction!), mTotalViews: Observable(String(contentViewArray[j].mControllerContentTotalViews!)), mTotalParticipants: Observable (String(contentViewArray[j].mControllerContentTotalParticipants!)))
+                        let setObj = ContentViewModel(mContentImagePath: Observable( contentInfoArray[i].mControllerContentImagePath!), mContentTitle:Observable (contentInfoArray[i].mConrollerContentTitle!), mLastViewTime: Observable(contentViewArray[j].mControllerContentLastSeen!), mActionPerformed: Observable(contentViewArray[j].mControllerContentAction!), mTotalViews: Observable(String(contentViewArray[j].mControllerContentTotalViews!)), mTotalParticipants: Observable (String(contentViewArray[j].mControllerContentTotalParticipants!)) ,mContentID: Observable(contentInfoArray[i].mContentID!) , mContentLink:contentInfoArray[i].mControllerContentLink!)
                             
                         // append setObj in the listOfContents array
                         mListOfContents.append(setObj)
@@ -114,7 +116,7 @@ class ContentListViewModel : PContentListInformerToViewModel {
     func populateDummyData()
     {
         // set a temp object to store ContentListObject attributes
-        let setObj = ContentViewModel(mContentImagePath:Observable ("imagePath.jpeg"), mContentTitle: Observable("Bat"), mLastViewTime: Observable ("9.23 pm"), mActionPerformed: Observable("opened"), mTotalViews: Observable("23"), mTotalParticipants:Observable("67"))
+        let setObj = ContentViewModel(mContentImagePath:Observable ("imagePath.jpeg"), mContentTitle: Observable("Bat"), mLastViewTime: Observable ("9.23 pm"), mActionPerformed: Observable("opened"), mTotalViews: Observable("23"), mTotalParticipants:Observable("67") , mContentID: Observable(1) , mContentLink: "http")
         
         //Add the contentList object to  mListOfContents array
         mListOfContents.append(setObj)

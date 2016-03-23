@@ -24,6 +24,7 @@ struct ContentInfo
     var mContentID : Int?
     var mConrollerContentTitle : String?
     var mControllerContentImagePath : String?
+    var mControllerContentLink : String?
 }
 
 struct ContentView
@@ -84,11 +85,11 @@ class ContentListController : PContentListListener
     // set dummy contentInfo
     func setDummyContentInfoController ()
     {
-        let controllerSetContentInfoObj1 = ContentInfo(mContentID: 5, mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")//ContentInfo(mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")
+        let controllerSetContentInfoObj1 = ContentInfo(mContentID: 5, mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg" , mControllerContentLink: "http")
         
         mControllerContentInfoArray.append(controllerSetContentInfoObj1)
         
-        let controllerSetContentInfoObj2 = ContentInfo(mContentID: 1, mConrollerContentTitle: "Bat", mControllerContentImagePath: "imagePath.jpeg")//ContentInfo(mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")
+        let controllerSetContentInfoObj2 = ContentInfo(mContentID: 1, mConrollerContentTitle: "Bat", mControllerContentImagePath: "imagePath.jpeg" , mControllerContentLink: "http")//ContentInfo(mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")
         mControllerContentInfoArray.append(controllerSetContentInfoObj2)
         
     }
@@ -125,10 +126,10 @@ class ContentListController : PContentListListener
         // set & get content info list model object
         for count in contentInfoJSONArray
         {
-           let DictObj =  contentInfoDataListModel(JSONContentInfoElement: count as! NSDictionary)
+           let DictObj =  ContentInfoDataListModel(JSONContentInfoElement: count as! NSDictionary)
             
             // set contentList controller's attributes
-            let temObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath)
+            let temObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath , mControllerContentLink: DictObj.mModelContentLink)
             
             // save the Content Info data in database
             mContentListDBHandlerObj!.saveContentListInfoData(temObj.mContentID!, contentTitle: temObj.mConrollerContentTitle!, contentImagePath: temObj.mControllerContentImagePath!)
@@ -152,7 +153,7 @@ class ContentListController : PContentListListener
         // set & get content list view details data model object
         for count in contentListViewJsonArray
         {
-            let DictObj = contentViewListDataModel(JSONContentViewElement: count as! NSDictionary)
+            let DictObj = ContentViewListDataModel(JSONContentViewElement: count as! NSDictionary)
             
             // set contentList view controller's attributes
             let temObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants)
@@ -189,4 +190,6 @@ class ContentListController : PContentListListener
         self.populateContentListDetails(JsonContentView)
         mContentViewModelListener!.updateViewModelContentListInformer()
     }
+    
+    
 }

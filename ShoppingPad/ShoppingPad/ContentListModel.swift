@@ -14,11 +14,12 @@
 import UIKit
 
 // Declare Content info list data model
-class contentInfoDataListModel
+class ContentInfoDataListModel
 {
     var mModelContentID = Int()
     var mModelContentTitle = String()
     var mModelContentImagePath = String()
+    var mModelContentLink = String()
    
     // populate content list info data model from json dictionary
     init(JSONContentInfoElement : NSDictionary)
@@ -27,11 +28,12 @@ class contentInfoDataListModel
         mModelContentID = Int(JSONContentInfoElement.objectForKey("content_id") as! NSNumber)
         mModelContentImagePath = (JSONContentInfoElement.objectForKey("imagesLink")! as! String)
         mModelContentTitle = (JSONContentInfoElement.objectForKey("display_name")! as! String)
+        mModelContentLink = (JSONContentInfoElement.objectForKey("zip")! as! String)
     }
 }
 
 // Declare content list view details data model
-class contentViewListDataModel
+class ContentViewListDataModel
 {
     // declare all content list view model attributes
     var mModelContentID = Int()

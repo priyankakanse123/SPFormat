@@ -17,22 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="15i-Ch-sSD">
-                                <rect key="frame" x="8" y="72" width="304" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="M72-dL-23d">
+                                <rect key="frame" x="13" y="72" width="294" height="29"/>
                                 <segments>
-                                    <segment title="Content"/>
-                                    <segment title="Views"/>
                                     <segment title="Contents"/>
+                                    <segment title="Views"/>
+                                    <segment title="Contacts"/>
                                 </segments>
                             </segmentedControl>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j8H-Iz-v0o">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Shopping Pad" id="QOQ-PG-Gf4"/>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-2v-Gbi">
-                                <rect key="frame" x="0.0" y="108" width="312" height="460"/>
+                                <rect key="frame" x="4" y="103" width="312" height="465"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomViewCell" rowHeight="60" id="rbB-KC-Zdq" customClass="CustomViewCell" customModule="ShoppingPad" customModuleProvider="target">
@@ -83,7 +77,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOa-PM-XYP">
-                                                    <rect key="frame" x="255" y="0.0" width="49" height="51"/>
+                                                    <rect key="frame" x="279" y="0.0" width="33" height="51"/>
                                                     <state key="normal" title="Button" image="shareIcon.png"/>
                                                     <connections>
                                                         <action selector="mShareButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9x3-2d-ItL"/>
@@ -98,6 +92,7 @@
                                             <outlet property="mContentCellTotalParticipants" destination="qoI-N6-qHj" id="EVX-Wl-oga"/>
                                             <outlet property="mContentCellTotalViews" destination="kej-G7-xZ4" id="mnn-de-7A1"/>
                                             <outlet property="mContentCellViewAction" destination="lD8-QP-Rtu" id="O8H-m0-U0y"/>
+                                            <segue destination="nL7-Ra-cCq" kind="show" identifier="showViewContent" trigger="accessoryAction" id="XNH-4u-wra"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -107,22 +102,87 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="2bV-oP-hVP"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EPS-7M-C8B">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="39S-QR-Vhs">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
                             </activityIndicatorView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIS-7S-zwt">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Shopping Pad" id="jFK-XD-9hD"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Shopping Pad" id="iEp-8o-1in"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="mActivityIndicator" destination="EPS-7M-C8B" id="gEK-1e-02Q"/>
+                        <outlet property="mActivityIndicator" destination="39S-QR-Vhs" id="60w-Pj-UfI"/>
                         <outlet property="tableView" destination="pbT-2v-Gbi" id="q56-em-gGY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="384" y="243"/>
+            <point key="canvasLocation" x="228" y="233"/>
+        </scene>
+        <!--View Content View Controller-->
+        <scene sceneID="XCg-Hs-G80">
+            <objects>
+                <viewController id="nL7-Ra-cCq" customClass="ViewContentViewController" customModule="ShoppingPad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W9d-ao-epG"/>
+                        <viewControllerLayoutGuide type="bottom" id="3UZ-jq-e5c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VSe-j1-enD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z75-47-s10">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem id="lKt-yC-Lac">
+                                        <barButtonItem key="leftBarButtonItem" title="back" id="Nsw-BF-DPp">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="8YO-Gd-Pdq"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FFP-FR-NuN">
+                                <rect key="frame" x="0.0" y="64" width="320" height="408"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGl-ej-EFE">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Message" id="Cb6-DL-frI">
+                                        <connections>
+                                            <action selector="sendMessage:" destination="nL7-Ra-cCq" id="dpx-OK-vkA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Pages" id="AVu-Qf-qyg"/>
+                                    <barButtonItem title="Views" id="vgT-Kt-AMq"/>
+                                    <barButtonItem title="Share" id="WDA-HX-bNf"/>
+                                    <barButtonItem title="Views" id="cfv-C1-IeM"/>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAK-EN-V3Y">
+                                <rect key="frame" x="0.0" y="480" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="4Iu-pz-xUi"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jYT-xE-URo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="770" y="243"/>
         </scene>
     </scenes>
     <resources>

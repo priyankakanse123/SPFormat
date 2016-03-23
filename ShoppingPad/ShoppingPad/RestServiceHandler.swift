@@ -22,8 +22,12 @@ class RestServiceHandler {
     //declare an array 
     var sampleInfoArray = NSMutableArray ()
     
-    // Rest URL string
-    var URLStringContentInfo : String = "http://54.165.130.78:3000/api/v4/usercontentview"
+    // Rest URL contentInfo string
+    var URLStringContentInfo : String = "http://54.86.64.100:3000/api/v4/content/info"
+    
+    // Rest URL contentView string
+    var URLStringContentView : String = "http://54.86.64.100:3000/api/v4/content/View"
+    
 
     // Declare Json Info array
     var mJSONArrayInfo = NSMutableArray()
@@ -56,7 +60,7 @@ class RestServiceHandler {
         
         
         // call the json from server
-        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://54.165.130.78:3000/api/v4/usercontentview")!, completionHandler: { (data, response, error) -> Void in
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: URLStringContentView)!, completionHandler: { (data, response, error) -> Void in
             // Check if data was received successfully
             if error == nil && data != nil {
                 do {
@@ -82,7 +86,7 @@ class RestServiceHandler {
         
         // call the json from server
         
-        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://54.165.130.78:3000/api/v4/contentinfo")!, completionHandler: { (data, response, error) -> Void in
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: URLStringContentInfo)!, completionHandler: { (data, response, error) -> Void in
             // Check if data was received successfully
             if error == nil && data != nil {
                 do {

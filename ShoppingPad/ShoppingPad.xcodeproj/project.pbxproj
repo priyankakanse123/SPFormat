@@ -34,6 +34,8 @@
 		0A5F97161C8C6B7800E6B316 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F97151C8C6B7800E6B316 /* Utility.swift */; };
 		0A5F971B1C8D374500E6B316 /* shareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5F971A1C8D374500E6B316 /* shareIcon.png */; };
 		0AFAD6941C998FC400135399 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0AFAD6931C998FC400135399 /* loading.gif */; };
+		0AFE16481C9FF05200F90BC6 /* ViewContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE16471C9FF05200F90BC6 /* ViewContentViewController.swift */; };
+		0AFE164A1CA0027A00F90BC6 /* defaultImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0AFE16491CA0027A00F90BC6 /* defaultImage.jpg */; };
 		5630AD16F40FC6D4A5132025 /* Pods_ShoppingPad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 422B8924EF86F9E2EDBE7648 /* Pods_ShoppingPad.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		0A5F97151C8C6B7800E6B316 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		0A5F971A1C8D374500E6B316 /* shareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareIcon.png; sourceTree = "<group>"; };
 		0AFAD6931C998FC400135399 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		0AFE16471C9FF05200F90BC6 /* ViewContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContentViewController.swift; sourceTree = "<group>"; };
+		0AFE16491CA0027A00F90BC6 /* defaultImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultImage.jpg; sourceTree = "<group>"; };
 		422B8924EF86F9E2EDBE7648 /* Pods_ShoppingPad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShoppingPad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4926CE221D73366257CA0C12 /* Pods-ShoppingPad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShoppingPad.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShoppingPad/Pods-ShoppingPad.release.xcconfig"; sourceTree = "<group>"; };
 		AEF86F13CF4AEE70FB5DE05E /* Pods-ShoppingPad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShoppingPad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShoppingPad/Pods-ShoppingPad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 		0A5F96C71C8BF3C000E6B316 /* ShoppingPad */ = {
 			isa = PBXGroup;
 			children = (
+				0A5F96C81C8BF3C000E6B316 /* AppDelegate.swift */,
 				0A5F97141C8C6B4600E6B316 /* ShoppingPadUtility */,
 				0A5F96F91C8BF3DD00E6B316 /* ShoppingPadView */,
 				0A5F96FA1C8BF3F600E6B316 /* ShoppingPadViewModel */,
@@ -188,7 +193,6 @@
 				0A5F96FD1C8BF48D00E6B316 /* ShoppingPadRestService */,
 				0A5F96FE1C8BF4A000E6B316 /* ShoppingPadLocalDB */,
 				0A5F96FF1C8BF4B100E6B316 /* ShoppingPadObserver */,
-				0A5F96C81C8BF3C000E6B316 /* AppDelegate.swift */,
 				0A5F96CC1C8BF3C000E6B316 /* Main.storyboard */,
 				0A5F96D21C8BF3C000E6B316 /* Assets.xcassets */,
 				0A5F96D41C8BF3C000E6B316 /* LaunchScreen.storyboard */,
@@ -221,8 +225,9 @@
 		0A5F96F91C8BF3DD00E6B316 /* ShoppingPadView */ = {
 			isa = PBXGroup;
 			children = (
-				0A5F97001C8BF69E00E6B316 /* ContentListViewController.swift */,
 				0A5F97121C8C52B900E6B316 /* CustomViewCell.swift */,
+				0A5F97001C8BF69E00E6B316 /* ContentListViewController.swift */,
+				0AFE16471C9FF05200F90BC6 /* ViewContentViewController.swift */,
 			);
 			name = ShoppingPadView;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				0AFAD6931C998FC400135399 /* loading.gif */,
 				0A5F97101C8C509800E6B316 /* imagePath.jpeg */,
 				0A5F971A1C8D374500E6B316 /* shareIcon.png */,
+				0AFE16491CA0027A00F90BC6 /* defaultImage.jpg */,
 			);
 			name = ShoppingPadMedia;
 			sourceTree = "<group>";
@@ -422,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AFE164A1CA0027A00F90BC6 /* defaultImage.jpg in Resources */,
 				0A5F96D61C8BF3C000E6B316 /* LaunchScreen.storyboard in Resources */,
 				0A5F97111C8C509800E6B316 /* imagePath.jpeg in Resources */,
 				0A5F96D31C8BF3C000E6B316 /* Assets.xcassets in Resources */,
@@ -508,6 +515,7 @@
 				0A5F97161C8C6B7800E6B316 /* Utility.swift in Sources */,
 				0A05BBDB1C92F02B00CBE2B3 /* FMDatabaseQueue.m in Sources */,
 				0A05BBDC1C92F02B00CBE2B3 /* FMResultSet.m in Sources */,
+				0AFE16481C9FF05200F90BC6 /* ViewContentViewController.swift in Sources */,
 				0A5F97031C8BF88C00E6B316 /* ContentListViewModel.swift in Sources */,
 				0A5F97011C8BF69E00E6B316 /* ContentListViewController.swift in Sources */,
 				0A5F97071C8BFA6D00E6B316 /* ContentListModel.swift in Sources */,
