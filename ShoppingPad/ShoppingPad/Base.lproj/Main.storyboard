@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Shopping Pad-->
@@ -17,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="M72-dL-23d">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="M72-dL-23d">
                                 <rect key="frame" x="13" y="72" width="294" height="29"/>
                                 <segments>
                                     <segment title="Contents"/>
@@ -25,7 +26,7 @@
                                     <segment title="Contacts"/>
                                 </segments>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-2v-Gbi">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-2v-Gbi">
                                 <rect key="frame" x="4" y="103" width="312" height="465"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -105,7 +106,7 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="39S-QR-Vhs">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
                             </activityIndicatorView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIS-7S-zwt">
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIS-7S-zwt">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Shopping Pad" id="jFK-XD-9hD"/>
@@ -113,6 +114,18 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="pbT-2v-Gbi" secondAttribute="trailing" constant="-16" id="34a-WE-eLU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pbT-2v-Gbi" secondAttribute="bottom" id="3m8-WD-rxI"/>
+                            <constraint firstItem="pbT-2v-Gbi" firstAttribute="top" secondItem="M72-dL-23d" secondAttribute="bottom" constant="3" id="HpO-Ws-VWs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LIS-7S-zwt" secondAttribute="trailing" constant="-20" id="Jfy-yw-fTC"/>
+                            <constraint firstItem="M72-dL-23d" firstAttribute="top" secondItem="LIS-7S-zwt" secondAttribute="bottom" constant="8" id="LAI-pU-V7b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="M72-dL-23d" secondAttribute="trailing" constant="-7" id="OWS-lp-FiZ"/>
+                            <constraint firstItem="LIS-7S-zwt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="QyP-tk-9Da"/>
+                            <constraint firstItem="LIS-7S-zwt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="XCb-So-7Iy"/>
+                            <constraint firstItem="pbT-2v-Gbi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="s2t-Y3-iZt"/>
+                            <constraint firstItem="M72-dL-23d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-7" id="zxp-ZM-Cta"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shopping Pad" id="iEp-8o-1in"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -137,10 +150,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z75-47-s10">
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z75-47-s10">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
-                                    <navigationItem id="lKt-yC-Lac">
+                                    <navigationItem title="Title" id="lKt-yC-Lac">
                                         <barButtonItem key="leftBarButtonItem" title="back" id="Nsw-BF-DPp">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" id="8YO-Gd-Pdq"/>
@@ -149,32 +162,34 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FFP-FR-NuN">
-                                <rect key="frame" x="0.0" y="64" width="320" height="408"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGl-ej-EFE">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGl-ej-EFE">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items>
-                                    <barButtonItem title="Message" id="Cb6-DL-frI">
+                                    <barButtonItem title="message" id="Cb6-DL-frI">
                                         <connections>
                                             <action selector="sendMessage:" destination="nL7-Ra-cCq" id="dpx-OK-vkA"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Pages" id="AVu-Qf-qyg"/>
-                                    <barButtonItem title="Views" id="vgT-Kt-AMq"/>
+                                    <barButtonItem title="Pages" id="AVu-Qf-qyg">
+                                        <connections>
+                                            <action selector="pagesButtonPressed:" destination="nL7-Ra-cCq" id="rPo-HD-e4l"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Media" id="vgT-Kt-AMq"/>
                                     <barButtonItem title="Share" id="WDA-HX-bNf"/>
                                     <barButtonItem title="Views" id="cfv-C1-IeM"/>
                                 </items>
                             </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAK-EN-V3Y">
-                                <rect key="frame" x="0.0" y="480" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem title="Item" id="4Iu-pz-xUi"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z75-47-s10" firstAttribute="top" secondItem="W9d-ao-epG" secondAttribute="bottom" id="Cf6-FH-dQ6"/>
+                            <constraint firstItem="3UZ-jq-e5c" firstAttribute="top" secondItem="EGl-ej-EFE" secondAttribute="bottom" id="ICx-fp-e1g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z75-47-s10" secondAttribute="trailing" constant="-20" id="Iqv-Ac-6Nc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EGl-ej-EFE" secondAttribute="trailing" constant="-20" id="gRv-fW-gmn"/>
+                            <constraint firstItem="EGl-ej-EFE" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="hv5-ud-XJI"/>
+                            <constraint firstItem="z75-47-s10" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="jo8-9S-pvP"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>

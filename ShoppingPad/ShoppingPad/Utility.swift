@@ -12,6 +12,9 @@
 import Foundation
 import UIKit
 import MessageUI
+import ReactiveKit
+import ReactiveUIKit
+import Alamofire
 
 
 class Utility : ViewContentViewController, MFMessageComposeViewControllerDelegate
@@ -30,34 +33,8 @@ class Utility : ViewContentViewController, MFMessageComposeViewControllerDelegat
         
     }
     
-    // call image from within 5 seconds
-    func callImageURL(urlString : String) -> UIImage
-    {
-        // define an image
-        var contentImage : UIImage = UIImage(named: "defaultImage.jpg")!
-        
-        // convert String url to NSURL
-        let url = NSURL(string: urlString)
-        
-        // if url exist
-        if (url != nil)
-        {
-            // fetch the imageData from url
-            let data = NSData(contentsOfURL: url!)
-            
-            // if image data exist
-            if (data != nil)
-            {
-                // convert imagedata back to an image
-                contentImage = UIImage(data: data!)!
-            }
-        }
-            
-        return contentImage
-    }
     
     // send text message from the mobile phone
-    
     func sendTextMessage ()
     {
         if (MFMessageComposeViewController.canSendText()) {
@@ -76,12 +53,37 @@ class Utility : ViewContentViewController, MFMessageComposeViewControllerDelegat
   
     }
     
-    //... handle sms screen actions
+    // fetch image from server
+    func fetchImage(url: NSURL) -> Operation<UIImage, NSError> {
+        return Operation { observer in
+            
+            // use almofire to deal with server request
+            let request = Alamofire.request(.GET, url).response { request, response, data, error in
+                
+                // if error occurs then abort the operation
+                if let error = error {
+                    observer.failure(error)
+                } else {
+                    // if doesnt occurs error then convert imageData back to image
+                    observer.next(UIImage(data : data!)!)
+                    observer.success()
+                }
+            }
+            
+            // if response is nil then execute this block
+            return BlockDisposable {
+                request.cancel()
+            }
+        }
+    }
+    
+    // handle sms screen actions
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult)
     {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
 
     
     

@@ -25,6 +25,14 @@ struct ContentInfo
     var mConrollerContentTitle : String?
     var mControllerContentImagePath : String?
     var mControllerContentLink : String?
+    var mModelContentType : String?
+    var mModelContentCreatedTime : String?
+    var mModelContentDescription : String?
+    var mModelContentModifiedAt : String?
+    var mModelContentSyncDateTime : String?
+    var mModelContentTitleName : String?
+    var mModelContentURL : String?
+    var mModelContentZipPath : String?
 }
 
 struct ContentView
@@ -35,6 +43,15 @@ struct ContentView
     var mControllerContentLastSeen : String?
     var mControllerContentTotalViews : Int?
     var mControllerContentTotalParticipants : Int?
+    var mControllerDisplayProfile : String?
+    var mControllerEmailID : String?
+    var mControllerFirstName : String?
+    var mControllerLastName : String?
+    var mControllerLastViewdDateTime : String?
+    var mControllerUserAdminID : Int?
+    var mControllerUserContentID : Int?
+    var mControllerUserID : Int?
+
 }
 
 class ContentListController : PContentListListener
@@ -85,30 +102,20 @@ class ContentListController : PContentListListener
     // set dummy contentInfo
     func setDummyContentInfoController ()
     {
-        let controllerSetContentInfoObj1 = ContentInfo(mContentID: 5, mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg" , mControllerContentLink: "http")
-        
+        let controllerSetContentInfoObj1 = ContentInfo(mContentID: 1, mConrollerContentTitle: "ball", mControllerContentImagePath: "http", mControllerContentLink: "http//", mModelContentType: "image", mModelContentCreatedTime: "9.34 pm", mModelContentDescription: "red color", mModelContentModifiedAt: "7.29 pm", mModelContentSyncDateTime: "4.34 pm ", mModelContentTitleName: "bat", mModelContentURL: "http : // ", mModelContentZipPath: "www.")
         mControllerContentInfoArray.append(controllerSetContentInfoObj1)
-        
-        let controllerSetContentInfoObj2 = ContentInfo(mContentID: 1, mConrollerContentTitle: "Bat", mControllerContentImagePath: "imagePath.jpeg" , mControllerContentLink: "http")//ContentInfo(mConrollerContentTitle: "Ball", mControllerContentImagePath: "imagePath.jpeg")
-        mControllerContentInfoArray.append(controllerSetContentInfoObj2)
-        
+    
     }
     
     // set dummy contentViewDetails
     func setDummyContentViewDetails ()
     {
         // set first dummy object
-        let controllerSetContentViewDetailsObj1 = ContentView(mContentID: 1, mControllerContentAction: "opened", mControllerContentLastSeen: "9.33 pm", mControllerContentTotalViews: 23, mControllerContentTotalParticipants: 99)
+        let controllerSetContentViewDetailsObj1 = ContentView(mContentID: 1, mControllerContentAction: "opened", mControllerContentLastSeen: "3.25 pm", mControllerContentTotalViews: 45, mControllerContentTotalParticipants: 78, mControllerDisplayProfile: "display_name", mControllerEmailID: "riya@gmail.com", mControllerFirstName: "Riya", mControllerLastName: "Shastri", mControllerLastViewdDateTime: "5.45 pm", mControllerUserAdminID: 1, mControllerUserContentID: 0, mControllerUserID: 4)
         
         // add first dummy object
         mControllerContentViewsDetailsArray.append(controllerSetContentViewDetailsObj1)
-        
-        // set second dummy object
-        let controllerSetContentViewDetailsObj2 = ContentView(mContentID: 5, mControllerContentAction: "clicked", mControllerContentLastSeen: "5.19 pm", mControllerContentTotalViews: 90, mControllerContentTotalParticipants: 78)
-        
-        // add second dummy object
-        mControllerContentViewsDetailsArray.append(controllerSetContentViewDetailsObj2)
-        
+    
     }
     
     
@@ -129,13 +136,12 @@ class ContentListController : PContentListListener
            let DictObj =  ContentInfoDataListModel(JSONContentInfoElement: count as! NSDictionary)
             
             // set contentList controller's attributes
-            let temObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath , mControllerContentLink: DictObj.mModelContentLink)
+            let tempObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath, mControllerContentLink: DictObj.mModelContentLink, mModelContentType: DictObj.mModelContentType, mModelContentCreatedTime: DictObj.mModelContentCreatedTime, mModelContentDescription: DictObj.mModelContentDescription, mModelContentModifiedAt: DictObj.mModelContentModifiedAt, mModelContentSyncDateTime: DictObj.mModelContentSyncDateTime, mModelContentTitleName: DictObj.mModelContentTitleName, mModelContentURL: DictObj.mModelContentURL, mModelContentZipPath: DictObj.mModelContentZipPath)
             
             // save the Content Info data in database
-            mContentListDBHandlerObj!.saveContentListInfoData(temObj.mContentID!, contentTitle: temObj.mConrollerContentTitle!, contentImagePath: temObj.mControllerContentImagePath!)
-            
+            mContentListDBHandlerObj!.saveContentListInfoData(tempObj.mContentID!, contentTitle: tempObj.mConrollerContentTitle!, contentImagePath: tempObj.mControllerContentImagePath!, contentLink: tempObj.mControllerContentLink!, contentType: tempObj.mModelContentType!, contentCreatedTime: tempObj.mModelContentCreatedTime!, contentDescription: tempObj.mModelContentDescription!, contentModifiedAt: tempObj.mModelContentModifiedAt!, contentSyncDateTime: tempObj.mModelContentSyncDateTime!, contentTitleName: tempObj.mModelContentTitleName!, contentURL: tempObj.mModelContentURL!, contentZipPath: tempObj.mModelContentZipPath!)
             // append this contentListInfo array
-            mControllerContentInfoArray.append(temObj)
+            mControllerContentInfoArray.append(tempObj)
         }
     }
     
@@ -156,14 +162,15 @@ class ContentListController : PContentListListener
             let DictObj = ContentViewListDataModel(JSONContentViewElement: count as! NSDictionary)
             
             // set contentList view controller's attributes
-            let temObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants)
+            let tempObj = ContentView(mContentID: DictObj.mModelContentID, mControllerContentAction: DictObj.mModelContentAction, mControllerContentLastSeen: DictObj.mModelContentLastSeen, mControllerContentTotalViews: DictObj.mModelContentTotalViews, mControllerContentTotalParticipants: DictObj.mModelContentTotalParticipants, mControllerDisplayProfile: DictObj.mModelDisplayProfile, mControllerEmailID: DictObj.mModelDisplayProfile, mControllerFirstName: DictObj.mModelFirstName, mControllerLastName: DictObj.mModelLastName, mControllerLastViewdDateTime: DictObj.mModelLastViewdDateTime, mControllerUserAdminID: DictObj.mModelUserAdminID, mControllerUserContentID: DictObj.mModelUserContentID, mControllerUserID: DictObj.mModelUserID)
+            
             
             
             // save the Content Info data in database
-            mContentListDBHandlerObj!.saveContentListViewData(temObj.mContentID!, contentAction: temObj.mControllerContentAction!, contentLastSenn: temObj.mControllerContentLastSeen!, contentTotalViews: temObj.mControllerContentTotalViews!, contentTotalParticipants: temObj.mControllerContentTotalParticipants!)
+            mContentListDBHandlerObj!.saveContentListViewData(tempObj.mContentID!, contentAction: tempObj.mControllerContentAction!, contentLastSenn: tempObj.mControllerContentLastSeen!, contentTotalViews: tempObj.mControllerContentTotalViews!, contentTotalParticipants: tempObj.mControllerContentTotalParticipants!, displayProfile: tempObj.mControllerDisplayProfile!, emailId: tempObj.mControllerEmailID!, firstName: tempObj.mControllerFirstName!, lastName: tempObj.mControllerLastName!, lastViewDateTime: tempObj.mControllerLastViewdDateTime!, userAdminID: tempObj.mControllerUserAdminID!, userContentID: tempObj.mControllerUserContentID!, userID: tempObj.mControllerUserID!)
             
             // append this contentListInfo array
-            mControllerContentViewsDetailsArray.append(temObj)
+            mControllerContentViewsDetailsArray.append(tempObj)
         }
     }
     

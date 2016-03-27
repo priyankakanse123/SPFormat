@@ -14,5 +14,6 @@ import Foundation
 
 protocol PContentListInformerToViewModel
 {
+    // informs content List Data Model that data is now availiable in controller
     func updateViewModelContentListInformer()
 }

@@ -95,13 +95,13 @@ class ContentListDBHandler {
     }
     
     // save contentList info data in the table 
-    func saveContentListInfoData(contentID : Int , contentTitle : String , contentImagePath : String)
+    func saveContentListInfoData(contentID : Int , contentTitle : String , contentImagePath : String , contentLink : String , contentType : String , contentCreatedTime : String , contentDescription : String , contentModifiedAt : String ,contentSyncDateTime : String , contentTitleName : String , contentURL : String , contentZipPath : String)
     {
         // write a query to check whether table exist or not and if not then create a table
-        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT)"
+        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT , Content_Link TEXT , Content_Type TEXT , Content_CreatedTime TEXT , Content_Description TEXT , Content_ModifiedTime TEXT , Content_SyncDateTime TEXT , Content_TitleName TEXT , Content_URL TEXT , Content_ZipPath TEXT)"
         
         // write a query to insert content info data in database
-        let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath) VALUES('\(contentID)','\((contentTitle))','\((contentImagePath))')"
+        let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath , Content_Link ,  Content_Type , Content_CreatedTime , Content_Description , Content_ModifiedTime , Content_SyncDateTime , Content_TitleName , Content_URL , Content_ZipPath) VALUES('\(contentID)','\((contentTitle))','\((contentImagePath))' , '\((contentLink))' , '\((contentType))' , '\((contentCreatedTime))' , '\((contentDescription))' , '\((contentModifiedAt))' , '\((contentSyncDateTime))' , '\((contentTitleName))' , '\((contentURL))' , '\((contentZipPath))')"
         
         // save the database in local database
         self.saveData(createTableQuery, insertContentInfoQuery: insertDataQuery)
@@ -109,12 +109,14 @@ class ContentListDBHandler {
 
     }
     
-    func saveContentListViewData(contentID : Int , contentAction : String , contentLastSenn : String , contentTotalViews : Int , contentTotalParticipants : Int)
+    func saveContentListViewData(contentID : Int , contentAction : String , contentLastSenn : String , contentTotalViews : Int , contentTotalParticipants : Int , displayProfile : String , emailId : String , firstName : String , lastName : String , lastViewDateTime : String , userAdminID : Int , userContentID : Int , userID : Int)
     {
-        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER)"
+        
+        // write a query to create a table
+        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER , Display_Profile TEXT , Email_ID TEXT , FirstName TEXT , LastName TEXT , LastViewDateTime TEXT , UserAdmin_ID INTEGER , UserContent_ID INTEGER , User_ID INTEGER , UserID INTEGER )"
         
         // write a query to insert content info data in database
-        let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants) VALUES(\(contentID),'\((contentAction))','\((contentLastSenn))' , \(contentTotalViews) , \(contentTotalParticipants) )"
+        let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants , Display_Profile , Email_ID , FirstName , LastName , LastViewDateTime , UserAdmin_ID , UserContent_ID , UserID ) VALUES(\(contentID),'\((contentAction))','\((contentLastSenn))' , \(contentTotalViews) , \(contentTotalParticipants) , '\((displayProfile))' , '\((emailId))' , '\((firstName))' , '\((lastName))' , '\((lastViewDateTime))' , \(userAdminID) , \(userContentID) , \(userID))"
         
         // save the data in local database
         self.saveData(createTableQuery, insertContentInfoQuery: insertDataQuery)

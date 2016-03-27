@@ -14,6 +14,10 @@
 //
 
 import UIKit
+import ReactiveKit
+import ReactiveUIKit
+import Alamofire
+
 
 class ContentListViewController: UIViewController , ContentListViewObserver , UITableViewDataSource , UITableViewDelegate
 {
@@ -35,21 +39,16 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     
     // create an object of ContentViewModel Structure
     var mContentViewModel : ContentViewModel?
-    
-    // create object of utility class
-    var mUtility = Utility()
-    
-    // crate variable saving content_id
-    var mContent_id : Int?
 
-    // create variable used to store content_link
-    var mContentLink : String?
+    // crate variable saving content_id
+    var mContent_Id : Int?
+
+    // initialize custom cell
+    var customCell : CustomViewCell?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        navigationController?.navigationBarHidden = true
         
         // start animating activity indicator
         mActivityIndicator.startAnimating()
@@ -63,20 +62,15 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         // define background thread
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            print("This is run on the background queue")
+        dispatch_async(backgroundQueue,
+            {
+                print("This is run on the background queue")
             
-            // call the method populateModel method which is inside contentList
-            self.mViewModelObj!.populateContentListData()
+                // call the method populateModel method which is inside contentList
+                self.mViewModelObj!.populateContentListData()
             
-            self.bindData()
-
             })
-
-        
     }
-    
-    
     
     // Return number of sections in tableView
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -93,38 +87,27 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     // Set Cell values of the tableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
-        //create object of customViewCell
-        mCustomCell = tableView.dequeueReusableCellWithIdentifier("CustomViewCell") as? CustomViewCell
-        
-        //make imageView Round
-        Utility().RoundImageView(mCustomCell!.mContentCellImageView!)
-    
+       
+        //var customCell : CustomViewCell = CustomViewCell()
         //fetch the cell object from View
         let cellObjectToDisplay = mViewModelObj!.getContentInfo(indexPath.row)
         
-        // load image from url
-        //let cellImage = mUtility.callImageURL(cellObjectToDisplay.mContentImagePath.value)
+        //create object of customViewCell
+        let tableCell = tableView.cellForRowAtIndexPath(indexPath)
+        //var customCell : CustomViewCell = (tableView.cellForRowAtIndexPath(indexPath) as? CustomViewCell)!
         
-        // set content icon
-        //self.mCustomCell!.mContentCellImageView.image = cellImage
-        
-        // set content Title
-        mCustomCell!.mContentCellTitleLabel.text = cellObjectToDisplay.mContentTitle.value
-        
-        // set content action
-        mCustomCell!.mContentCellViewAction.text = (cellObjectToDisplay.mActionPerformed.value)
-        
-        // set total number of views of the content
-        mCustomCell!.mContentCellTotalViews.text = String(cellObjectToDisplay.mTotalViews.value) + " views"
-        
-        // set total number of participants
-        mCustomCell!.mContentCellTotalParticipants.text = String(cellObjectToDisplay.mTotalParticipants.value) + " participants"
-        
-        //set last seen of the content
-       mCustomCell!.mContentCellLastSeen.text = cellObjectToDisplay.mLastViewTime.value
-        
-        return mCustomCell!
+        if (tableCell == nil)
+        {
+            print("not null")
+            customCell = (tableView.dequeueReusableCellWithIdentifier("CustomViewCell") as?
+                CustomViewCell)!
+            Utility().RoundImageView(customCell!.mContentCellImageView)
+            customCell!.mContentCellImageView.image = UIImage(named: "defaultImage.jpg")
+            self.bindData(customCell!, contentViewModelObj: cellObjectToDisplay)
+
+        }
+
+        return customCell!
         
     }
     
@@ -162,14 +145,13 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         
         let cellObjectToDisplay = mViewModelObj!.getContentInfo(indexPath.row)
         
-        
         // set the parameter of the contents
-        mContent_id = cellObjectToDisplay.mContentID.value
-        mContentLink = cellObjectToDisplay.mContentLink
+        mContent_Id = cellObjectToDisplay.mContentID.value
         
         // call the segue to open view content screen
         self.performSegueWithIdentifier("showViewContent", sender: nil)
     }
+    
     
     // send data through segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -180,15 +162,8 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
             let viewContentControllerObj = segue.destinationViewController as! ViewContentViewController
             
             // pass content link & content_id to view content controller
-            viewContentControllerObj.mContent_ID = mContent_id!
-            viewContentControllerObj.mContentLink = mContentLink!
+            //viewContentControllerObj.mContent_ID = mContent_Id!
         }
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // reload tableview 
@@ -197,26 +172,58 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         //self.loadView()
         print("count" , mViewModelObj!.getContentInfoCount())
         
-        dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+        dispatch_async(dispatch_get_main_queue())
+        { [unowned self] in
             
             // reload tableView
             self.tableView.reloadData()
             
             // remove activity indicator
             self.mActivityIndicator.hidden = true
-
+            
         }
     }
     
     // bind the data of view controller to view model
-    func bindData()
+    func bindData(customCellObj : CustomViewCell , contentViewModelObj : ContentViewModel)
     {
-        mContentViewModel?.mContentTitle.bindTo(mCustomCell!.mContentCellTitleLabel)
-        mContentViewModel?.mActionPerformed.bindTo(mCustomCell!.mContentCellViewAction)
-        mContentViewModel?.mLastViewTime.bindTo(mCustomCell!.mContentCellLastSeen)
+        // bind content image
+        let url = NSURL(string: contentViewModelObj.mContentImagePath.value)
+        if (url != nil)
+        {
+            //mUtility?.fetchImage(url!).retry(3).bindNextTo(customCellObj.mContentCellImageView)
+            let image : ObservableBuffer<UIImage>? = Utility().fetchImage(url!).shareNext()
+            if ((image) != nil)
+            {
+            
+            image!.bindTo(customCellObj.mContentCellImageView)
+            //mUtility?.fetchImage(url!).bindNextTo(customCellObj.mContentCellImageView)
+            }
+        }
+        
+        // bind content title
+        contentViewModelObj.mContentTitle.bindTo(customCellObj.mContentCellTitleLabel)
+        
+        // bind content Action
+        contentViewModelObj.mActionPerformed.bindTo(customCellObj.mContentCellViewAction)
+        
+        // bind content last seen
+        contentViewModelObj.mLastViewTime.bindTo(customCellObj.mContentCellLastSeen)
+        
+        // bind content total participants data
+        contentViewModelObj.mTotalParticipants.bindTo(customCellObj.mContentCellTotalParticipants)
+        
+        // bind total views data
+        contentViewModelObj.mTotalViews.bindTo(customCellObj.mContentCellTotalViews)
         
         
-        mContentViewModel?.mTotalParticipants.bindTo(mCustomCell!.mContentCellTotalViews)
-        mContentViewModel?.mTotalViews.bindTo(mCustomCell!.mContentCellTotalViews)
     }
+    
+    
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
 }

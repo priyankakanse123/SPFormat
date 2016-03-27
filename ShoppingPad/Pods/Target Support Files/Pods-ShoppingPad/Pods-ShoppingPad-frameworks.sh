@@ -84,6 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-ShoppingPad/Alamofire.framework"
   install_framework "Pods-ShoppingPad/CocoaLumberjack.framework"
   install_framework "Pods-ShoppingPad/ReactiveFoundation.framework"
   install_framework "Pods-ShoppingPad/ReactiveKit.framework"
@@ -91,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ShoppingPad/SVGKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-ShoppingPad/Alamofire.framework"
   install_framework "Pods-ShoppingPad/CocoaLumberjack.framework"
   install_framework "Pods-ShoppingPad/ReactiveFoundation.framework"
   install_framework "Pods-ShoppingPad/ReactiveKit.framework"

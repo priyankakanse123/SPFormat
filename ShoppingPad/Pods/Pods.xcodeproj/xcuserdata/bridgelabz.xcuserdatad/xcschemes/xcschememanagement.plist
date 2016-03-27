@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CocoaLumberjack.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,22 +42,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>046044D8E7E3C0C93E356AE1D5252973</key>
+		<key>0C72103A5BBB8213F782D235ED88ADC5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1247ED8C6FE571AB7B9625EEFDE05479</key>
+		<key>4BF3A77CA50D7CA3E889F00010442831</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>14028E1E71B85BF90B7D617452E08A79</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1B308CB66FE1891215FE35118CFD4434</key>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F5E5658F7F555C0563FE5C6DFDA8E7A7</key>
+		<key>9738F25A5A715B4BE45594F8F0D9A169</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A31EDE72E1E682D588A1DE9EE66EACDD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F2AB475AEE721C0C48DC335301B75ACA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
