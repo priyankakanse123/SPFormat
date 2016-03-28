@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingPad/ContentListController.swift"
-            timestampString = "480776538.13813"
+            timestampString = "480849007.024744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "populateContentListDetails(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingPad/ContentListController.swift"
-            timestampString = "480776538.13813"
+            timestampString = "480849007.024744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "populateContentListDetails(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingPad/ContentListController.swift"
-            timestampString = "480776538.13813"
+            timestampString = "480849007.024744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "populateContentInfoData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingPad/ContentListController.swift"
-            timestampString = "480776538.13813"
+            timestampString = "480849007.024744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "updateControllerViewModel(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -678,11 +678,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingPad/Utility.swift"
-            timestampString = "480764902.734435"
+            timestampString = "480849007.024744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "fetchImage(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -694,11 +694,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingPad/Utility.swift"
-            timestampString = "480764902.734435"
+            timestampString = "480849007.024744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "fetchImage(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -710,11 +710,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingPad/Utility.swift"
-            timestampString = "480764902.734435"
+            timestampString = "480849007.024744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "fetchImage(_:)"
             landmarkType = "5">
             <Locations>
@@ -726,12 +726,12 @@
                   moduleName = "ShoppingPad"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/SPFormat/ShoppingPad/ShoppingPad/Utility.swift"
-                  timestampString = "480776539.178117"
+                  timestampString = "480849008.067036"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "26">
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -741,12 +741,12 @@
                   moduleName = "ShoppingPad"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/SPFormat/ShoppingPad/ShoppingPad/Utility.swift"
-                  timestampString = "480776539.178362"
+                  timestampString = "480849008.067308"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "42">
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "30">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -764,6 +764,22 @@
             startingLineNumber = "84"
             endingLineNumber = "84"
             landmarkName = "init(JSONContentViewElement:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoppingPad/ContentListController.swift"
+            timestampString = "480848986.039957"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "init(contentViewModelListener:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

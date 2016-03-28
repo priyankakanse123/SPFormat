@@ -121,4 +121,40 @@ class ContentListDBHandler {
         // save the data in local database
         self.saveData(createTableQuery, insertContentInfoQuery: insertDataQuery)
     }
+    
+    func getContentListInfoData()
+    {
+        let contentDB = FMDatabase(path: mDatabasePath as String)
+        
+        
+        
+        for
+    {
+        if contentDB.open()
+        {
+            let querySQL = "SELECT * FROM CONTACTS WHERE Content_ID = '\(i)'"
+            
+            let results:FMResultSet? = contactDB.executeQuery(querySQL,
+                withArgumentsInArray: nil)
+            
+            if results?.next() == true {
+                let addressS : String =  (results?.stringForColumn("address"))!
+                let phoneS : String =  (results?.stringForColumn("phone"))!
+                address.text = addressS
+                phoneNo.text = phoneS
+                //address.text = results?.stringForColumn("address")
+                //phoneNo.text = results?.stringForColumn("phone")
+                status.text = "Record Found"
+            } else {
+                status.text = "Record not found"
+                address.text = ""
+                phoneNo.text = ""
+            }
+            contactDB.close()
+        } else {
+            print("Error: \(contactDB.lastErrorMessage())")
+        }
+    }
+
+    }
 }

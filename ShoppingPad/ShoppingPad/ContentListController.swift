@@ -93,6 +93,17 @@ class ContentListController : PContentListListener
         }
         else
         {
+            // check if internet connection is availiable or not
+            if Utility().isConnectedToNetwork() == true
+            {
+                print("Internet connection OK")
+                
+            } else
+            {
+                print("Internet connection FAILED")
+                
+            }
+            
             // set ContentViewModelListner protocols object
             mContentViewModelListener = contentViewModelListener
         }
@@ -196,6 +207,12 @@ class ContentListController : PContentListListener
         // populate content view details method
         self.populateContentListDetails(JsonContentView)
         mContentViewModelListener!.updateViewModelContentListInformer()
+    }
+    
+    // update data from local db
+    func updateContentInfoDataFRomLocalDB()
+    {
+        
     }
     
     

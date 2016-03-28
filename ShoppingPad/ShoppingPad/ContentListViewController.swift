@@ -191,13 +191,10 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         let url = NSURL(string: contentViewModelObj.mContentImagePath.value)
         if (url != nil)
         {
-            //mUtility?.fetchImage(url!).retry(3).bindNextTo(customCellObj.mContentCellImageView)
             let image : ObservableBuffer<UIImage>? = Utility().fetchImage(url!).shareNext()
             if ((image) != nil)
             {
-            
-            image!.bindTo(customCellObj.mContentCellImageView)
-            //mUtility?.fetchImage(url!).bindNextTo(customCellObj.mContentCellImageView)
+                image!.bindTo(customCellObj.mContentCellImageView)
             }
         }
         
@@ -215,8 +212,6 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         
         // bind total views data
         contentViewModelObj.mTotalViews.bindTo(customCellObj.mContentCellTotalViews)
-        
-        
     }
     
     
