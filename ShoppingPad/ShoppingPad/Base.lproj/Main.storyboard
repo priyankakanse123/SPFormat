@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -40,7 +41,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hur-HX-bhi">
                                                     <rect key="frame" x="8" y="5" width="50" height="50"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tf-iW-IDa">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tf-iW-IDa">
                                                     <rect key="frame" x="72" y="6" width="105" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="105" id="Pus-fx-ezp"/>
@@ -55,8 +56,11 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhD-Uf-vCb">
-                                                    <rect key="frame" x="8" y="6" width="50" height="48"/>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhD-Uf-vCb">
+                                                    <rect key="frame" x="8" y="6" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="WhD-Uf-vCb" secondAttribute="height" multiplier="1:1" id="j4z-Hh-6r0"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="mImageViewButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5KX-7M-Gy6"/>
                                                         <action selector="mShareButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yBN-c7-ciB"/>
@@ -74,7 +78,7 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOa-PM-XYP">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOa-PM-XYP">
                                                     <rect key="frame" x="273" y="4" width="33" height="49"/>
                                                     <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                     <state key="normal" title="Button" image="shareIcon.png"/>
@@ -95,6 +99,7 @@
                                                 <constraint firstItem="8Tf-iW-IDa" firstAttribute="top" secondItem="WhD-Uf-vCb" secondAttribute="top" id="I9k-KZ-nHo"/>
                                                 <constraint firstItem="lD8-QP-Rtu" firstAttribute="top" secondItem="8Tf-iW-IDa" secondAttribute="bottom" constant="15" id="Jlb-UN-aq8"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="kej-G7-xZ4" secondAttribute="trailing" constant="44" id="KPv-uo-dMq"/>
+                                                <constraint firstItem="nOa-PM-XYP" firstAttribute="top" secondItem="dXM-ms-lug" secondAttribute="topMargin" constant="-4" id="N7S-gj-9Cm"/>
                                                 <constraint firstItem="WhD-Uf-vCb" firstAttribute="top" secondItem="dXM-ms-lug" secondAttribute="topMargin" constant="-2" id="Rge-GS-0SY"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="WhD-Uf-vCb" secondAttribute="bottom" constant="-3" id="aug-AY-ZIh"/>
                                                 <constraint firstItem="qoI-N6-qHj" firstAttribute="top" secondItem="kej-G7-xZ4" secondAttribute="bottom" constant="4" id="cn8-OZ-3FM"/>
@@ -105,6 +110,7 @@
                                                 <constraint firstItem="nOa-PM-XYP" firstAttribute="leading" secondItem="kej-G7-xZ4" secondAttribute="trailing" constant="13" id="vel-HY-rHC"/>
                                                 <constraint firstItem="8Tf-iW-IDa" firstAttribute="top" secondItem="kej-G7-xZ4" secondAttribute="top" id="vrF-32-SpS"/>
                                                 <constraint firstItem="Gg1-8j-dTK" firstAttribute="leading" secondItem="lD8-QP-Rtu" secondAttribute="trailing" constant="4" id="yFo-W8-48f"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="nOa-PM-XYP" secondAttribute="bottom" constant="-2" id="z0w-Jk-Uxw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

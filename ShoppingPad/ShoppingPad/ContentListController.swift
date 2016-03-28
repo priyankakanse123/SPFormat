@@ -93,16 +93,6 @@ class ContentListController : PContentListListener
         }
         else
         {
-            // check if internet connection is availiable or not
-            if Utility().isConnectedToNetwork() == true
-            {
-                print("Internet connection OK")
-                
-            } else
-            {
-                print("Internet connection FAILED")
-                
-            }
             
             // set ContentViewModelListner protocols object
             mContentViewModelListener = contentViewModelListener
@@ -133,8 +123,23 @@ class ContentListController : PContentListListener
     //  populate model & get model object from controller
     func PopulateContentInfoData()
     {
-        // populate data in the rest
-        mRestServiceHandlerOfContentList!.populateContenInfoDta(self)
+        // check if internet connection is availiable or not
+        if Utility().isConnectedToNetwork() == true
+        {
+            print("Internet connection OK")
+            
+            // populate data in the rest
+            mRestServiceHandlerOfContentList!.populateContenInfoDta(self)
+            
+        } else
+        {
+            print("Internet connection FAILED")
+            
+            // populate data from local database
+            self.updateContentInfoDataFRomLocalDB()
+            
+        }
+
     }
 
     
@@ -212,6 +217,11 @@ class ContentListController : PContentListListener
     // update data from local db
     func updateContentInfoDataFRomLocalDB()
     {
+        // get content info list data from local database
+        mContentListDBHandlerObj!.getContentListInfoDataFromDB(self)
+        
+        // get content view data from local database
+        mContentListDBHandlerObj!.getContentViewDataFromDB(self)
         
     }
     

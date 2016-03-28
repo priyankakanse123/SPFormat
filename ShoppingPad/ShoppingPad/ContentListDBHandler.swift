@@ -61,11 +61,6 @@ class ContentListDBHandler {
             {
                 print("Error: \(contentDB.lastErrorMessage())")
             }
-                
-            else
-            {
-               print("executed")
-            }
             
             // insert query
             let insertContentQuery = insertContentInfoQuery
@@ -98,10 +93,10 @@ class ContentListDBHandler {
     func saveContentListInfoData(contentID : Int , contentTitle : String , contentImagePath : String , contentLink : String , contentType : String , contentCreatedTime : String , contentDescription : String , contentModifiedAt : String ,contentSyncDateTime : String , contentTitleName : String , contentURL : String , contentZipPath : String)
     {
         // write a query to check whether table exist or not and if not then create a table
-        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (Content_ID INTEGER PRIMARY KEY , Content_Title TEXT, Content_ImagePath TEXT , Content_Link TEXT , Content_Type TEXT , Content_CreatedTime TEXT , Content_Description TEXT , Content_ModifiedTime TEXT , Content_SyncDateTime TEXT , Content_TitleName TEXT , Content_URL TEXT , Content_ZipPath TEXT)"
+        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTINFO (content_id INTEGER PRIMARY KEY , display_name TEXT, imagesLink TEXT , contentLink TEXT , contentType TEXT , created_at TEXT , decription TEXT , modified_at TEXT , syncDateTime TEXT , title TEXT , url TEXT , zip TEXT)"
         
         // write a query to insert content info data in database
-        let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (Content_ID ,Content_Title,Content_ImagePath , Content_Link ,  Content_Type , Content_CreatedTime , Content_Description , Content_ModifiedTime , Content_SyncDateTime , Content_TitleName , Content_URL , Content_ZipPath) VALUES('\(contentID)','\((contentTitle))','\((contentImagePath))' , '\((contentLink))' , '\((contentType))' , '\((contentCreatedTime))' , '\((contentDescription))' , '\((contentModifiedAt))' , '\((contentSyncDateTime))' , '\((contentTitleName))' , '\((contentURL))' , '\((contentZipPath))')"
+        let insertDataQuery : String = "INSERT INTO CONTENTLISTINFO (content_id ,display_name,imagesLink , contentLink ,  contentType , created_at , decription , modified_at , syncDateTime , title , url , zip) VALUES('\(contentID)','\((contentTitle))','\((contentImagePath))' , '\((contentLink))' , '\((contentType))' , '\((contentCreatedTime))' , '\((contentDescription))' , '\((contentModifiedAt))' , '\((contentSyncDateTime))' , '\((contentTitleName))' , '\((contentURL))' , '\((contentZipPath))')"
         
         // save the database in local database
         self.saveData(createTableQuery, insertContentInfoQuery: insertDataQuery)
@@ -113,48 +108,102 @@ class ContentListDBHandler {
     {
         
         // write a query to create a table
-        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (Content_ID INTEGER PRIMARY KEY , Content_Action TEXT, Content_LastSeen TEXT , Content_TotalViews INTEGER , Content_TotalParticipants INTEGER , Display_Profile TEXT , Email_ID TEXT , FirstName TEXT , LastName TEXT , LastViewDateTime TEXT , UserAdmin_ID INTEGER , UserContent_ID INTEGER , User_ID INTEGER , UserID INTEGER )"
+        let createTableQuery : String = "CREATE TABLE IF NOT EXISTS CONTENTLISTVIEWS (contentId INTEGER PRIMARY KEY , action TEXT, lastViewedDateTime TEXT , numberOfViews INTEGER , numberofparticipant INTEGER , displayProfile TEXT , email TEXT , firstName TEXT , lastName TEXT  , userAdminId INTEGER , userContentId INTEGER , userId INTEGER)"
         
         // write a query to insert content info data in database
-        let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (Content_ID ,Content_Action,Content_LastSeen,Content_TotalViews,Content_TotalParticipants , Display_Profile , Email_ID , FirstName , LastName , LastViewDateTime , UserAdmin_ID , UserContent_ID , UserID ) VALUES(\(contentID),'\((contentAction))','\((contentLastSenn))' , \(contentTotalViews) , \(contentTotalParticipants) , '\((displayProfile))' , '\((emailId))' , '\((firstName))' , '\((lastName))' , '\((lastViewDateTime))' , \(userAdminID) , \(userContentID) , \(userID))"
+        let insertDataQuery : String = "INSERT INTO CONTENTLISTVIEWS (contentId ,action ,lastViewedDateTime, numberOfViews ,numberofparticipant , displayProfile , email , firstName , lastName  , userAdminId , userContentId , userId ) VALUES(\(contentID),'\((contentAction))','\((contentLastSenn))' , \(contentTotalViews) , \(contentTotalParticipants) , '\((displayProfile))' , '\((emailId))' , '\((firstName))' , '\((lastName))'  , \(userAdminID) , \(userContentID) , \(userID))"
         
         // save the data in local database
         self.saveData(createTableQuery, insertContentInfoQuery: insertDataQuery)
     }
     
-    func getContentListInfoData()
+    
+    // get content info data from local database
+    func getContentListInfoDataFromDB(pContentListListenerObj : PContentListListener)
     {
-        let contentDB = FMDatabase(path: mDatabasePath as String)
+        var contentInfoArray = NSMutableArray()
+        print("IN LOCALDB VIEW")
         
+        let contentDB = FMDatabase(path : mDatabasePath as String)
         
+        if contentDB == nil
+        {
+            print("Error: \(contentDB.lastErrorMessage())")
+        }
         
-        for
-    {
         if contentDB.open()
         {
-            let querySQL = "SELECT * FROM CONTACTS WHERE Content_ID = '\(i)'"
+            // select query
+            let getContentView = "SELECT * FROM CONTENTLISTINFO "
             
-            let results:FMResultSet? = contactDB.executeQuery(querySQL,
-                withArgumentsInArray: nil)
-            
-            if results?.next() == true {
-                let addressS : String =  (results?.stringForColumn("address"))!
-                let phoneS : String =  (results?.stringForColumn("phone"))!
-                address.text = addressS
-                phoneNo.text = phoneS
-                //address.text = results?.stringForColumn("address")
-                //phoneNo.text = results?.stringForColumn("phone")
-                status.text = "Record Found"
-            } else {
-                status.text = "Record not found"
-                address.text = ""
-                phoneNo.text = ""
+            // define resultset
+            let contentView = contentDB.executeQuery(getContentView, withArgumentsInArray: nil)
+           
+            // seperate value form resultset
+            while(contentView.next() == true)
+            {
+                print("Some data macth in VIew")
+                
+                // conver to NsDictionary and add to Array
+                contentInfoArray.addObject(contentView.resultDictionary())
+                print("contentViewArray in DB ", contentInfoArray)
+                
             }
-            contactDB.close()
-        } else {
-            print("Error: \(contactDB.lastErrorMessage())")
+            
+            contentDB.close()
         }
+            
+        else
+        {
+            print("Error: \(contentDB.lastErrorMessage())")
+        }
+        
+        pContentListListenerObj.updateControllerListModel(contentInfoArray)
     }
-
+    
+    // get content list from database
+    func getContentViewDataFromDB(pContentListListenerObj : PContentListListener)
+    {
+        var contentViewArray = NSMutableArray()
+        print("IN LOCALDB VIEW")
+            
+        let contentDB = FMDatabase(path : mDatabasePath as String)
+       
+        if contentDB == nil
+        {
+            print("Error: \(contentDB.lastErrorMessage())")
+        }
+            
+        if contentDB.open()
+        {
+            // select query
+            let getContentView = "SELECT * FROM CONTENTLISTVIEWS"
+                
+            // define resultset
+            let contentView = contentDB.executeQuery(getContentView, withArgumentsInArray: nil)
+            print("contentView" , contentView.next())
+                
+            // seperate value form resultset
+            while(contentView.next() == true)
+            {
+                print("Some data macth in VIew")
+                    
+                // conver to NsDictionary and add to Array
+                contentViewArray.addObject(contentView.resultDictionary())
+                print("contentViewArray in DB ", contentViewArray)
+                    
+            }
+                
+                contentDB.close()
+        }
+                
+        else
+        {
+            print("Error: \(contentDB.lastErrorMessage())")
+        }
+        
+        // pass content view data to the controller
+        pContentListListenerObj.updateControllerViewModel(contentViewArray)
     }
+    
 }
