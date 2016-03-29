@@ -23,10 +23,10 @@ class RestServiceHandler {
     var sampleInfoArray = NSMutableArray ()
     
     // Rest URL contentInfo string
-    var URLStringContentInfo : String = "http://54.86.64.100:3000/api/v4/content/info"
+    var URLStringContentInfo : String = "http://54.86.64.100:3000/api/v1/content/content-info"
     
     // Rest URL contentView string
-    var URLStringContentView : String = "http://54.86.64.100:3000/api/v4/content/View"
+    var URLStringContentView : String = "http://54.86.64.100:3000/api/v1/content/user-content-view"
     
 
     // Declare Json Info array

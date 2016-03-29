@@ -162,7 +162,7 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
             let viewContentControllerObj = segue.destinationViewController as! ViewContentViewController
             
             // pass content link & content_id to view content controller
-            //viewContentControllerObj.mContent_ID = mContent_Id!
+            viewContentControllerObj.mContentID = mContent_Id
         }
     }
     

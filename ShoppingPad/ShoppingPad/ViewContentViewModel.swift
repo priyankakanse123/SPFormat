@@ -48,7 +48,7 @@ class ViewContentViewModel
         let firstObj = ViewContentStruct(mContentPage: SVGKImage(named: "page_2.svg"), mMediaImage: UIImage(named: "imagePath.jpeg")!)
         
         // initialize second dummy object
-        let secondObj = ViewContentStruct(mContentPage: SVGKImage(named: "page_6.svg"), mMediaImage: UIImage(named: "shareIcon.png")!)
+        let secondObj = ViewContentStruct(mContentPage: SVGKImage(named: "page_6.svg"), mMediaImage: UIImage(named: "m_10839690492099.png")!)
         
         // append first object
         mViewContentStructArray.append(firstObj)

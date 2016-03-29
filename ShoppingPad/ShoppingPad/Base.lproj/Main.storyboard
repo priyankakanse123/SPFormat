@@ -199,14 +199,50 @@
                                     </barButtonItem>
                                     <barButtonItem title="Pages" id="AVu-Qf-qyg">
                                         <connections>
-                                            <action selector="pagesButtonPressed:" destination="nL7-Ra-cCq" id="rPo-HD-e4l"/>
+                                            <action selector="PageButtonPressed:" destination="nL7-Ra-cCq" id="HaJ-gu-zpc"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Media" id="vgT-Kt-AMq"/>
+                                    <barButtonItem title="Media" id="vgT-Kt-AMq">
+                                        <connections>
+                                            <action selector="mediaButtonPressed:" destination="nL7-Ra-cCq" id="j9D-en-snM"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Share" id="WDA-HX-bNf"/>
                                     <barButtonItem title="Views" id="cfv-C1-IeM"/>
                                 </items>
                             </toolbar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oep-ne-VOg">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZa-oF-nzz">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mediaCell" id="MXS-YX-9Jc" customClass="ViewContentMediaCollectionCell" customModule="ShoppingPad" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-7y-Fc9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="mMediaImageView" destination="PYp-7y-Fc9" id="i9q-RT-CS2"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="nL7-Ra-cCq" id="oXb-pO-g3U"/>
+                                    <outlet property="delegate" destination="nL7-Ra-cCq" id="j6D-fP-15J"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -214,20 +250,72 @@
                             <constraint firstItem="3UZ-jq-e5c" firstAttribute="top" secondItem="EGl-ej-EFE" secondAttribute="bottom" id="ICx-fp-e1g"/>
                             <constraint firstAttribute="trailingMargin" secondItem="z75-47-s10" secondAttribute="trailing" constant="-20" id="Iqv-Ac-6Nc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EGl-ej-EFE" secondAttribute="trailing" constant="-20" id="gRv-fW-gmn"/>
+                            <constraint firstItem="Oep-ne-VOg" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="h3d-3v-AWp"/>
                             <constraint firstItem="EGl-ej-EFE" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="hv5-ud-XJI"/>
                             <constraint firstItem="z75-47-s10" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="jo8-9S-pvP"/>
+                            <constraint firstItem="Oep-ne-VOg" firstAttribute="top" secondItem="z75-47-s10" secondAttribute="bottom" id="nIA-iA-yXB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Oep-ne-VOg" secondAttribute="trailing" constant="-20" id="sfi-lC-Epk"/>
+                            <constraint firstItem="EGl-ej-EFE" firstAttribute="top" secondItem="Oep-ne-VOg" secondAttribute="bottom" id="svN-dg-5NK"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mViewContentMediaCollectionView" destination="Oep-ne-VOg" id="4Uo-hu-0Z1"/>
+                        <segue destination="Jsl-B0-6k2" kind="show" identifier="showImage" id="RCe-iv-NpC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYT-xE-URo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="770" y="243"/>
         </scene>
+        <!--Show View Content-->
+        <scene sceneID="L8Q-Te-5x3">
+            <objects>
+                <viewController id="Jsl-B0-6k2" customClass="ShowViewContent" customModule="ShoppingPad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b9N-iG-YOz"/>
+                        <viewControllerLayoutGuide type="bottom" id="RM2-wA-bgk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dln-SF-ZyF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZH1-E0-lrR">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="jfx-qX-Uvn">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="lLR-x1-LBW">
+                                            <connections>
+                                                <action selector="BackButtonPressed:" destination="Jsl-B0-6k2" id="UDT-os-0Tn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZH1-E0-lrR" firstAttribute="top" secondItem="b9N-iG-YOz" secondAttribute="bottom" id="E0I-2D-Gyd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZH1-E0-lrR" secondAttribute="trailing" constant="-20" id="b02-Zf-naG"/>
+                            <constraint firstItem="ZH1-E0-lrR" firstAttribute="leading" secondItem="Dln-SF-ZyF" secondAttribute="leadingMargin" constant="-20" id="iAO-xH-hhF"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="nL7-Ra-cCq" kind="show" identifier="backToTheViewContent" id="zPv-Fs-Pko"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nmc-6O-LHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1190" y="243"/>
+        </scene>
     </scenes>
     <resources>
         <image name="shareIcon.png" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="zPv-Fs-Pko"/>
+    </inferredMetricsTieBreakers>
 </document>
