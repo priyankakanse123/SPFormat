@@ -98,7 +98,7 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         
         if (tableCell == nil)
         {
-            print("not null")
+            print("null")
             customCell = (tableView.dequeueReusableCellWithIdentifier("CustomViewCell") as?
                 CustomViewCell)!
             Utility().RoundImageView(customCell!.mContentCellImageView)

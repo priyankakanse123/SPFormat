@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Shopping Pad-->
@@ -41,7 +42,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hur-HX-bhi">
                                                     <rect key="frame" x="8" y="5" width="50" height="50"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tf-iW-IDa">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tf-iW-IDa">
                                                     <rect key="frame" x="72" y="6" width="105" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="105" id="Pus-fx-ezp"/>
@@ -180,39 +181,37 @@
                             <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z75-47-s10">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="lKt-yC-Lac">
-                                        <barButtonItem key="leftBarButtonItem" title="back" id="Nsw-BF-DPp">
-                                            <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="8YO-Gd-Pdq"/>
-                                            </connections>
-                                        </barButtonItem>
+                                    <navigationItem id="lKt-yC-Lac">
+                                        <leftBarButtonItems>
+                                            <barButtonItem image="back.png" id="Nsw-BF-DPp">
+                                                <connections>
+                                                    <segue destination="BYZ-38-t0r" kind="show" id="8YO-Gd-Pdq"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="action" id="yyd-Na-dxC">
+                                                <connections>
+                                                    <action selector="showMoreImages:" destination="nL7-Ra-cCq" id="OZ9-wT-yxk"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="compose" id="BVf-4x-ZaX"/>
+                                        </leftBarButtonItems>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Pages" id="U3M-TX-ufb">
+                                                <connections>
+                                                    <action selector="PageButtonPressed:" destination="nL7-Ra-cCq" id="CUy-lY-5vk"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Media" id="C6N-Mj-oIp">
+                                                <connections>
+                                                    <action selector="mediaButtonPressed:" destination="nL7-Ra-cCq" id="cNt-6w-VPh"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGl-ej-EFE">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem title="message" id="Cb6-DL-frI">
-                                        <connections>
-                                            <action selector="sendMessage:" destination="nL7-Ra-cCq" id="dpx-OK-vkA"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Pages" id="AVu-Qf-qyg">
-                                        <connections>
-                                            <action selector="PageButtonPressed:" destination="nL7-Ra-cCq" id="HaJ-gu-zpc"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Media" id="vgT-Kt-AMq">
-                                        <connections>
-                                            <action selector="mediaButtonPressed:" destination="nL7-Ra-cCq" id="j9D-en-snM"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Share" id="WDA-HX-bNf"/>
-                                    <barButtonItem title="Views" id="cfv-C1-IeM"/>
-                                </items>
-                            </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oep-ne-VOg">
-                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZa-oF-nzz">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -227,12 +226,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-7y-Fc9">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-7y-Fc9">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="PYp-7y-Fc9" firstAttribute="leading" secondItem="MXS-YX-9Jc" secondAttribute="leading" id="9of-gG-sBY"/>
+                                            <constraint firstAttribute="bottom" secondItem="PYp-7y-Fc9" secondAttribute="bottom" id="YZc-az-hEh"/>
+                                            <constraint firstAttribute="trailing" secondItem="PYp-7y-Fc9" secondAttribute="trailing" id="fEZ-JL-m3B"/>
+                                            <constraint firstItem="PYp-7y-Fc9" firstAttribute="top" secondItem="MXS-YX-9Jc" secondAttribute="top" id="oIP-6v-H66"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="mMediaImageView" destination="PYp-7y-Fc9" id="i9q-RT-CS2"/>
                                         </connections>
@@ -247,15 +252,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="z75-47-s10" firstAttribute="top" secondItem="W9d-ao-epG" secondAttribute="bottom" id="Cf6-FH-dQ6"/>
-                            <constraint firstItem="3UZ-jq-e5c" firstAttribute="top" secondItem="EGl-ej-EFE" secondAttribute="bottom" id="ICx-fp-e1g"/>
                             <constraint firstAttribute="trailingMargin" secondItem="z75-47-s10" secondAttribute="trailing" constant="-20" id="Iqv-Ac-6Nc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="EGl-ej-EFE" secondAttribute="trailing" constant="-20" id="gRv-fW-gmn"/>
-                            <constraint firstItem="Oep-ne-VOg" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="h3d-3v-AWp"/>
-                            <constraint firstItem="EGl-ej-EFE" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="hv5-ud-XJI"/>
+                            <constraint firstItem="Oep-ne-VOg" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="dJX-hu-IPg"/>
                             <constraint firstItem="z75-47-s10" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="jo8-9S-pvP"/>
-                            <constraint firstItem="Oep-ne-VOg" firstAttribute="top" secondItem="z75-47-s10" secondAttribute="bottom" id="nIA-iA-yXB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Oep-ne-VOg" secondAttribute="trailing" constant="-20" id="sfi-lC-Epk"/>
-                            <constraint firstItem="EGl-ej-EFE" firstAttribute="top" secondItem="Oep-ne-VOg" secondAttribute="bottom" id="svN-dg-5NK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Oep-ne-VOg" secondAttribute="trailing" constant="-20" id="r0p-Jk-UaM"/>
+                            <constraint firstItem="3UZ-jq-e5c" firstAttribute="top" secondItem="Oep-ne-VOg" secondAttribute="bottom" id="w6W-Nt-uxr"/>
+                            <constraint firstItem="Oep-ne-VOg" firstAttribute="top" secondItem="z75-47-s10" secondAttribute="bottom" id="xvv-8X-VSl"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -311,8 +313,19 @@
             </objects>
             <point key="canvasLocation" x="1190" y="243"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="hjW-eL-0a4">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="1Ia-Lm-bUJ" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZyA-3o-eva" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="1108"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="back.png" width="24" height="40"/>
         <image name="shareIcon.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

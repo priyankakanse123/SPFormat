@@ -30,20 +30,31 @@ class ViewContentViewController: UIViewController , UICollectionViewDataSource ,
     // create a variable to store current page image
     var mCurrentPageImage : SVGKImage?
     
+    // create a variable to store page title
+    var mPageTitle : String?
+    
     // button status media or page
     var mPage : Bool? = true
+    
+    // set first default page Image
+    var mDefaultFirstPageImageView : SVGKFastImageView?
+    
+    // set first default media image
+    var mDefultFirstMediaImgeView : UIImageView?
+    
+    
+    // outlet of collection view
+    @IBOutlet weak var mViewContentMediaCollectionView: UICollectionView!
     
     // executes when screen gets loaded
     override func viewDidLoad()
     {
-        // initialize ViewContentViewModel 
+        // initialize ViewContentViewModel
         mViewContentViewModelObj = ViewContentViewModel()
         
-        print("contentid" , mContentID)
+        self.PageButtonPressed(self)
     }
     
-    // outlet of collection view
-    @IBOutlet weak var mViewContentMediaCollectionView: UICollectionView!
     
     // method returns number of total sections in the collection view
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
@@ -70,18 +81,23 @@ class ViewContentViewController: UIViewController , UICollectionViewDataSource ,
         // if media button pressed
         if (mPage == true)
         {
-            // initialize a page imageview with default page image
-            var mSVGImageView = SVGKFastImageView(SVGKImage: SVGKImage(named: "page_2.svg"))
-        
             // set the page imageview frame with default size
-            mSVGImageView = SVGKFastImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
+            var mSVGImageView = SVGKFastImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: (cell.frame.height - 50)))
         
             // set the pageImageview with actual pageImage
             mSVGImageView = SVGKFastImageView(SVGKImage: viewModelobj[indexPath.row].mContentPage)
-        
             
             // add page imageview in the cell
             cell.contentView.addSubview(mSVGImageView)
+            
+//            // add the title label
+//            let titleLabel : UILabel = UILabel(frame: CGRect(x: 0, y: cell.frame.height - 20, width: cell.frame.width, height: 20))
+            
+//            // set the page title
+//            titleLabel.text = viewModelobj[indexPath.row].mPageTitle
+//            
+//            // add title label to the collection view cell
+//            cell.contentView.addSubview(titleLabel)
             
             // return the cell
             return cell
@@ -155,8 +171,17 @@ class ViewContentViewController: UIViewController , UICollectionViewDataSource ,
         // set the flag of mPage
         mPage = true
         
+        // get the data from view model
+        let viewModelobj = mViewContentViewModelObj!.getViewContentData()
+
+        // set first default imageView
+        mDefaultFirstPageImageView = SVGKFastImageView(SVGKImage: viewModelobj[0].mContentPage)
+        
+        // add this to the view
+        self.mViewContentMediaCollectionView.addSubview(mDefaultFirstPageImageView!)
+        
         // reload collection view
-        mViewContentMediaCollectionView.reloadData()
+        //mViewContentMediaCollectionView.reloadData()
     }
     
     // action taken after pressing media button
@@ -166,8 +191,27 @@ class ViewContentViewController: UIViewController , UICollectionViewDataSource ,
         // set flag to the false
         mPage = false
         
-        // reload collection view
+        // set default mediaimage
+        mDefultFirstMediaImgeView = UIImageView(frame: mViewContentMediaCollectionView.frame)
+        
+        // set default image 
+        mDefultFirstMediaImgeView?.image = UIImage(named: "imagePath.jpeg")
+        
+        // add this default image to the view
+        view.addSubview(mDefultFirstMediaImgeView!)
+    }
+    
+    @IBAction func showMoreImages(sender: AnyObject)
+    {
+        // hide default pageimageview
+        mDefaultFirstPageImageView?.hidden = true
+        
+        // hide default imageview
+        mDefaultFirstPageImageView?.hidden = true
+        
+        // reload collectionview
         mViewContentMediaCollectionView.reloadData()
     }
+    
     
 }

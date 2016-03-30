@@ -19,6 +19,7 @@ struct ViewContentStruct
 {
     var mContentPage : SVGKImage        // store page images in .svg format
     var mMediaImage : UIImage           // store media images in .png model
+    var mPageTitle : String             // store page title
 }
 
 class ViewContentViewModel
@@ -45,10 +46,10 @@ class ViewContentViewModel
     func dummyPopulateViewContentData()
     {
         // initialize first dummy object
-        let firstObj = ViewContentStruct(mContentPage: SVGKImage(named: "page_2.svg"), mMediaImage: UIImage(named: "imagePath.jpeg")!)
+        let firstObj = ViewContentStruct(mContentPage: SVGKImage(named: "page_2.svg"), mMediaImage: UIImage(named: "imagePath.jpeg")! , mPageTitle : "kalyan" )
         
         // initialize second dummy object
-        let secondObj = ViewContentStruct(mContentPage: SVGKImage(named: "page_6.svg"), mMediaImage: UIImage(named: "m_10839690492099.png")!)
+        let secondObj = ViewContentStruct(mContentPage: SVGKImage(named: "page_6.svg"), mMediaImage: UIImage(named: "m_10839690492099.png")! , mPageTitle : "Dadar")
         
         // append first object
         mViewContentStructArray.append(firstObj)
