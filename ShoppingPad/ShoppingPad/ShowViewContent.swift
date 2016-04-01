@@ -60,9 +60,9 @@ class ShowViewContent: UIViewController
     {
         if segue.identifier == "backToTheViewContent"
         {
-            let viewContentVC = segue.destinationViewController as? ViewContentViewController
+            //let viewContentVC = segue.destinationViewController as? ViewContentViewController
             
-            viewContentVC?.mPage = mPage
+            //viewContentVC?.mPage = mPage
         }
     }
 }

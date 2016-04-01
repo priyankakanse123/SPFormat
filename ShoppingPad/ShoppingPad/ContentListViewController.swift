@@ -159,10 +159,10 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         if(segue.identifier == "showViewContent")
         {
             // create object of view content controller
-            let viewContentControllerObj = segue.destinationViewController as! ViewContentViewController
+            //let viewContentControllerObj = segue.destinationViewController as! ViewContentViewController
             
             // pass content link & content_id to view content controller
-            viewContentControllerObj.mContentID = mContent_Id
+            //viewContentControllerObj.mContentID = mContent_Id
         }
     }
     
@@ -188,7 +188,11 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     func bindData(customCellObj : CustomViewCell , contentViewModelObj : ContentViewModel)
     {
         // bind content image
+//        var urlStr : NSString = contentViewModelObj.mContentImagePath.value.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        //var searchURL : NSURL = NSURL(string: urlStr as String)!
         let url = NSURL(string: contentViewModelObj.mContentImagePath.value)
+        
+        print("url" , url)
         if (url != nil)
         {
             let image : ObservableBuffer<UIImage>? = Utility().fetchImage(url!).shareNext()
@@ -197,6 +201,8 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
                 image!.bindTo(customCellObj.mContentCellImageView)
             }
         }
+        
+        
         
         // bind content title
         contentViewModelObj.mContentTitle.bindTo(customCellObj.mContentCellTitleLabel)

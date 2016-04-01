@@ -19,7 +19,7 @@ import SystemConfiguration
 
 
 
-class Utility : ViewContentViewController, MFMessageComposeViewControllerDelegate
+class Utility : UIViewController ,  MFMessageComposeViewControllerDelegate
 
 {
     
@@ -67,8 +67,12 @@ class Utility : ViewContentViewController, MFMessageComposeViewControllerDelegat
                     observer.failure(error)
                 } else {
                     // if doesnt occurs error then convert imageData back to image
-                    observer.next(UIImage(data : data!)!)
-                    observer.success()
+                    if(data != nil)
+                    {
+                        print("print" , observer.next(UIImage(data : data!)!))
+                        observer.next(UIImage(data : data!)!)
+                        observer.success()
+                    }
                 }
             }
             
@@ -77,6 +81,7 @@ class Utility : ViewContentViewController, MFMessageComposeViewControllerDelegat
                 request.cancel()
             }
         }
+    
     }
     
     // handle sms screen actions

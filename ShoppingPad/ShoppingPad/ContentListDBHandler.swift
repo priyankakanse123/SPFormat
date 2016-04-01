@@ -121,7 +121,7 @@ class ContentListDBHandler {
     // get content info data from local database
     func getContentListInfoDataFromDB(pContentListListenerObj : PContentListListener)
     {
-        var contentInfoArray = NSMutableArray()
+        let contentInfoArray = NSMutableArray()
         print("IN LOCALDB VIEW")
         
         let contentDB = FMDatabase(path : mDatabasePath as String)
@@ -164,7 +164,7 @@ class ContentListDBHandler {
     // get content list from database
     func getContentViewDataFromDB(pContentListListenerObj : PContentListListener)
     {
-        var contentViewArray = NSMutableArray()
+        let contentViewArray = NSMutableArray()
         print("IN LOCALDB VIEW")
             
         let contentDB = FMDatabase(path : mDatabasePath as String)

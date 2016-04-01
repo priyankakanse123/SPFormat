@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A02F0F41CACEBBD0093396E /* ViewContentPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F0F31CACEBBD0093396E /* ViewContentPageController.swift */; };
 		0A048F5C1CABD02300A567B5 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A048F5B1CABD02300A567B5 /* back.png */; };
 		0A048F5E1CABF9E100A567B5 /* default.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0A048F5D1CABF9E100A567B5 /* default.svg */; };
-		0A048F601CAC0D9C00A567B5 /* PageViewContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A048F5F1CAC0D9C00A567B5 /* PageViewContentController.swift */; };
 		0A05BBD81C92F02B00CBE2B3 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BBCE1C92F02B00CBE2B3 /* FMDatabase.m */; };
 		0A05BBD91C92F02B00CBE2B3 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BBD01C92F02B00CBE2B3 /* FMDatabaseAdditions.m */; };
 		0A05BBDA1C92F02B00CBE2B3 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BBD21C92F02B00CBE2B3 /* FMDatabasePool.m */; };
@@ -69,9 +69,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A02F0F31CACEBBD0093396E /* ViewContentPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContentPageController.swift; sourceTree = "<group>"; };
 		0A048F5B1CABD02300A567B5 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		0A048F5D1CABF9E100A567B5 /* default.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.svg; sourceTree = "<group>"; };
-		0A048F5F1CAC0D9C00A567B5 /* PageViewContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewContentController.swift; sourceTree = "<group>"; };
 		0A05BBCC1C92F02A00CBE2B3 /* ShoppingPad-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShoppingPad-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A05BBCD1C92F02B00CBE2B3 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		0A05BBCE1C92F02B00CBE2B3 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 				0AFE16471C9FF05200F90BC6 /* ViewContentViewController.swift */,
 				0AFA14401CAA62390084E7E5 /* ShowViewContent.swift */,
 				0AFA143C1CAA527C0084E7E5 /* ViewContentMediaCollectionCell.swift */,
-				0A048F5F1CAC0D9C00A567B5 /* PageViewContentController.swift */,
+				0A02F0F31CACEBBD0093396E /* ViewContentPageController.swift */,
 			);
 			name = ViewContentViewController;
 			sourceTree = "<group>";
@@ -575,11 +575,11 @@
 				0A5F97091C8BFB4300E6B316 /* RestServiceHandler.swift in Sources */,
 				0A5F970D1C8BFE9F00E6B316 /* ContentListObserver.swift in Sources */,
 				0AFA143D1CAA527C0084E7E5 /* ViewContentMediaCollectionCell.swift in Sources */,
+				0A02F0F41CACEBBD0093396E /* ViewContentPageController.swift in Sources */,
 				0A0DC59B1CA510C0007F5E46 /* ViewContentViewModel.swift in Sources */,
 				0A0891541C95BB2000C84723 /* PContentListInformerToViewModel.swift in Sources */,
 				0A05BBDA1C92F02B00CBE2B3 /* FMDatabasePool.m in Sources */,
 				0A5F96D11C8BF3C000E6B316 /* ShoppingPad.xcdatamodeld in Sources */,
-				0A048F601CAC0D9C00A567B5 /* PageViewContentController.swift in Sources */,
 				0A5F96C91C8BF3C000E6B316 /* AppDelegate.swift in Sources */,
 				0A0DC59D1CA510FF007F5E46 /* ViewContentController.swift in Sources */,
 			);

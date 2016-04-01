@@ -48,12 +48,6 @@ class RestServiceHandler {
        
     }
     
-    func popData()
-    {
-        
-    }
-    
-    
     // get content info JSON from server
     func populateViewDetailsData (contentListViewListener : PContentListListener)
     {
