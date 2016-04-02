@@ -180,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oep-ne-VOg">
-                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZa-oF-nzz">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -217,14 +217,8 @@
                                     <outlet property="delegate" destination="nL7-Ra-cCq" id="j6D-fP-15J"/>
                                 </connections>
                             </collectionView>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bPv-in-W84">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="315-Wi-pwC"/>
-                                </items>
-                            </navigationBar>
                             <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z75-47-s10">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem id="lKt-yC-Lac">
                                         <leftBarButtonItems>
@@ -258,16 +252,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="bPv-in-W84" secondAttribute="trailing" constant="-20" id="2go-BM-qgX"/>
-                            <constraint firstItem="z75-47-s10" firstAttribute="top" secondItem="bPv-in-W84" secondAttribute="bottom" id="Esl-1d-61I"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Oep-ne-VOg" secondAttribute="trailing" constant="-20" id="KjM-Yq-4wP"/>
-                            <constraint firstItem="Oep-ne-VOg" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="Nbx-7i-pNa"/>
-                            <constraint firstItem="bPv-in-W84" firstAttribute="top" secondItem="W9d-ao-epG" secondAttribute="bottom" id="VPu-tZ-pEt"/>
-                            <constraint firstItem="z75-47-s10" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="Wcs-dl-umk"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="z75-47-s10" secondAttribute="trailing" constant="-20" id="e1r-49-aVG"/>
-                            <constraint firstItem="3UZ-jq-e5c" firstAttribute="top" secondItem="Oep-ne-VOg" secondAttribute="bottom" id="jEo-qm-9Mj"/>
-                            <constraint firstItem="bPv-in-W84" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="ou3-uX-QIF"/>
-                            <constraint firstItem="Oep-ne-VOg" firstAttribute="top" secondItem="z75-47-s10" secondAttribute="bottom" id="zrx-Sr-IEj"/>
+                            <constraint firstItem="Oep-ne-VOg" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="72C-XY-NwG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Oep-ne-VOg" secondAttribute="trailing" constant="-20" id="82J-s5-VOL"/>
+                            <constraint firstItem="z75-47-s10" firstAttribute="top" secondItem="W9d-ao-epG" secondAttribute="bottom" id="VPJ-VZ-WGt"/>
+                            <constraint firstItem="3UZ-jq-e5c" firstAttribute="top" secondItem="Oep-ne-VOg" secondAttribute="bottom" id="anH-8O-A5S"/>
+                            <constraint firstItem="z75-47-s10" firstAttribute="leading" secondItem="VSe-j1-enD" secondAttribute="leadingMargin" constant="-20" id="hr8-83-LfL"/>
+                            <constraint firstItem="Oep-ne-VOg" firstAttribute="top" secondItem="z75-47-s10" secondAttribute="bottom" id="l6n-kL-p0N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z75-47-s10" secondAttribute="trailing" constant="-20" id="uqw-kL-OnU"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

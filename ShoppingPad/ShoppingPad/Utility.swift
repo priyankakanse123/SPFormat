@@ -23,6 +23,8 @@ class Utility : UIViewController ,  MFMessageComposeViewControllerDelegate
 
 {
     
+     var localPathOfImage : NSURL = NSURL(fileURLWithPath: "defaultImage.jpg")
+    
     var num : Bool = false
     // make imageView round
     func RoundImageView (imageView : UIImageView)
@@ -69,7 +71,6 @@ class Utility : UIViewController ,  MFMessageComposeViewControllerDelegate
                     // if doesnt occurs error then convert imageData back to image
                     if(data != nil)
                     {
-                        print("print" , observer.next(UIImage(data : data!)!))
                         observer.next(UIImage(data : data!)!)
                         observer.success()
                     }
@@ -119,7 +120,43 @@ class Utility : UIViewController ,  MFMessageComposeViewControllerDelegate
     }
 
     
-    
+    // This function dowload image in local path
+    func downloadImage(urle : NSString) 
+    {
+        // Trimm white Space
+        let urlTrim = urle.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        let urlStr : NSString = urlTrim.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        
+        let url = NSURL(string:urlStr as String)
+        
+        print("URL of source1",urlTrim)
+        print("URL of sourcec3", url)
+        
+       
+        
+        // dowload Image To Local Path
+        Alamofire.download(.GET, url!)
+            {
+                temporaryURL, response in
+                
+                // local path
+                let fileManager = NSFileManager.defaultManager()
+                //let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                
+                
+                let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                
+                let pathComponent = response.suggestedFilename
+                
+                print("directoryURL",directoryURL.URLByAppendingPathComponent(pathComponent!))
+                
+                self.localPathOfImage = directoryURL.URLByAppendingPathComponent(pathComponent!)
+                return directoryURL.URLByAppendingPathComponent(pathComponent!)
+                
+        }
+        
+    }
    
     
 }

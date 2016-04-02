@@ -154,8 +154,21 @@ class ContentListController : PContentListListener
             // set contentList controller's attributes
             let tempObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath, mControllerContentLink: DictObj.mModelContentLink, mModelContentType: DictObj.mModelContentType, mModelContentCreatedTime: DictObj.mModelContentCreatedTime, mModelContentDescription: DictObj.mModelContentDescription, mModelContentModifiedAt: DictObj.mModelContentModifiedAt, mModelContentSyncDateTime: DictObj.mModelContentSyncDateTime, mModelContentTitleName: DictObj.mModelContentTitleName, mModelContentURL: DictObj.mModelContentURL, mModelContentZipPath: DictObj.mModelContentZipPath)
             
+            // download the image from server
+            var utilityObj = Utility()
+            
+            utilityObj.downloadImage(tempObj.mControllerContentImagePath!)
+            
+            
+            var localPathOfImage = utilityObj.localPathOfImage
+            
+            var localPAthString : String = String(localPathOfImage)
+            
+            print("url" ,localPathOfImage )
+            
+            print("cdsv" , localPAthString)
             // save the Content Info data in database
-            mContentListDBHandlerObj!.saveContentListInfoData(tempObj.mContentID!, contentTitle: tempObj.mConrollerContentTitle!, contentImagePath: tempObj.mControllerContentImagePath!, contentLink: tempObj.mControllerContentLink!, contentType: tempObj.mModelContentType!, contentCreatedTime: tempObj.mModelContentCreatedTime!, contentDescription: tempObj.mModelContentDescription!, contentModifiedAt: tempObj.mModelContentModifiedAt!, contentSyncDateTime: tempObj.mModelContentSyncDateTime!, contentTitleName: tempObj.mModelContentTitleName!, contentURL: tempObj.mModelContentURL!, contentZipPath: tempObj.mModelContentZipPath!)
+            mContentListDBHandlerObj!.saveContentListInfoData(tempObj.mContentID!, contentTitle: tempObj.mConrollerContentTitle!, contentImagePath: localPAthString , contentLink: tempObj.mControllerContentLink!, contentType: tempObj.mModelContentType!, contentCreatedTime: tempObj.mModelContentCreatedTime!, contentDescription: tempObj.mModelContentDescription!, contentModifiedAt: tempObj.mModelContentModifiedAt!, contentSyncDateTime: tempObj.mModelContentSyncDateTime!, contentTitleName: tempObj.mModelContentTitleName!, contentURL: tempObj.mModelContentURL!, contentZipPath: tempObj.mModelContentZipPath!)
             // append this contentListInfo array
             mControllerContentInfoArray.append(tempObj)
         }
@@ -224,6 +237,4 @@ class ContentListController : PContentListListener
         mContentListDBHandlerObj!.getContentViewDataFromDB(self)
         
     }
-    
-    
 }

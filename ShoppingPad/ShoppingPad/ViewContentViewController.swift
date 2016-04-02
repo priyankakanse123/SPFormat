@@ -57,6 +57,9 @@ class ViewContentViewController: UIViewController , UICollectionViewDataSource ,
         // initialize ViewContentViewModel
         mViewContentViewModelObj = ViewContentViewModel()
         
+        // change background of collection view
+        mViewContentMediaCollectionView.backgroundColor = UIColor.whiteColor()
+        
         //initialize page view controller with view controller identifiew
         self.mPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as? UIPageViewController
         
@@ -73,7 +76,7 @@ class ViewContentViewController: UIViewController , UICollectionViewDataSource ,
         self.mPageViewController!.setViewControllers(viewControllers as? [UIViewController], direction: .Forward, animated: true, completion: nil)
         
         // set the frame of view controller
-        self.mPageViewController!.view.frame = CGRectMake(0, 108, self.view.frame.width, self.view.frame.size.height - 120)
+        self.mPageViewController!.view.frame = CGRectMake(0, 64, self.view.frame.width, self.view.frame.size.height - 120)
         
         // add the page view controller inside the main view controller
         self.addChildViewController(self.mPageViewController!)
@@ -316,18 +319,6 @@ class ViewContentViewController: UIViewController , UICollectionViewDataSource ,
         
         self.callDefaultImage(0)
         
-        //self.callDefaultImage(0)
-//        // get the data from view model
-//        let viewModelobj = mViewContentViewModelObj!.getViewContentData()
-//
-//        // set first default imageView
-//        //mDefaultFirstPageImageView = SVGKFastImageView(SVGKImage: viewModelobj[0].mContentPage)
-//        
-//        // add this to the view
-//        //self.mViewContentMediaCollectionView.addSubview(mDefaultFirstPageImageView!)
-//        
-//        // reload collection view
-//        //mViewContentMediaCollectionView.reloadData()
     }
     
     // action taken after pressing media button

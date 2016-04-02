@@ -196,13 +196,12 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
         if (url != nil)
         {
             let image : ObservableBuffer<UIImage>? = Utility().fetchImage(url!).shareNext()
+            
             if ((image) != nil)
             {
                 image!.bindTo(customCellObj.mContentCellImageView)
             }
         }
-        
-        
         
         // bind content title
         contentViewModelObj.mContentTitle.bindTo(customCellObj.mContentCellTitleLabel)
