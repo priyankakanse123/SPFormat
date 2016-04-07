@@ -102,9 +102,11 @@ class ContentListViewModel : PContentListInformerToViewModel {
                     {
                         // set object of viewModel with the contentInfo & contentView values
                         let setObj = ContentViewModel(mContentImagePath: Observable( contentInfoArray[i].mControllerContentImagePath!), mContentTitle:Observable (contentInfoArray[i].mConrollerContentTitle!), mLastViewTime: Observable(contentViewArray[j].mControllerContentLastSeen!), mActionPerformed: Observable(contentViewArray[j].mControllerContentAction!), mTotalViews: Observable(String(contentViewArray[j].mControllerContentTotalViews!)+"  views"), mTotalParticipants: Observable (String(contentViewArray[j].mControllerContentTotalParticipants!)+" participants"),mContentID: Observable(contentInfoArray[i].mContentID!))
-                            
+                        
                         // append setObj in the listOfContents array
                         mListOfContents.append(setObj)
+                        
+                        print(setObj.mContentImagePath)
                         
                     }
                 }

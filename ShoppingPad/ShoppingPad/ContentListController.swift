@@ -154,24 +154,33 @@ class ContentListController : PContentListListener
             // set contentList controller's attributes
             let tempObj = ContentInfo(mContentID: DictObj.mModelContentID, mConrollerContentTitle: DictObj.mModelContentTitle, mControllerContentImagePath: DictObj.mModelContentImagePath, mControllerContentLink: DictObj.mModelContentLink, mModelContentType: DictObj.mModelContentType, mModelContentCreatedTime: DictObj.mModelContentCreatedTime, mModelContentDescription: DictObj.mModelContentDescription, mModelContentModifiedAt: DictObj.mModelContentModifiedAt, mModelContentSyncDateTime: DictObj.mModelContentSyncDateTime, mModelContentTitleName: DictObj.mModelContentTitleName, mModelContentURL: DictObj.mModelContentURL, mModelContentZipPath: DictObj.mModelContentZipPath)
             
-            // download the image from server
-            var utilityObj = Utility()
             
-            utilityObj.downloadImage(tempObj.mControllerContentImagePath!)
+            let utilityObj = Utility()
+            if (utilityObj.isConnectedToNetwork() == true )
+            {
+                // download the image from server
+                let utilityObj = Utility()
             
+                // call download image from utility
+                utilityObj.downloadImage(tempObj)
             
-            var localPathOfImage = utilityObj.localPathOfImage
-            
-            var localPAthString : String = String(localPathOfImage)
-            
-            print("url" ,localPathOfImage )
-            
-            print("cdsv" , localPAthString)
-            // save the Content Info data in database
-            mContentListDBHandlerObj!.saveContentListInfoData(tempObj.mContentID!, contentTitle: tempObj.mConrollerContentTitle!, contentImagePath: localPAthString , contentLink: tempObj.mControllerContentLink!, contentType: tempObj.mModelContentType!, contentCreatedTime: tempObj.mModelContentCreatedTime!, contentDescription: tempObj.mModelContentDescription!, contentModifiedAt: tempObj.mModelContentModifiedAt!, contentSyncDateTime: tempObj.mModelContentSyncDateTime!, contentTitleName: tempObj.mModelContentTitleName!, contentURL: tempObj.mModelContentURL!, contentZipPath: tempObj.mModelContentZipPath!)
+//            let localPathOfImage = utilityObj.localPathOfImage
+//            
+//            let localPAthString : String = String(localPathOfImage)
+            }
+//            // save the Content Info data in database
+//            mContentListDBHandlerObj!.saveContentListInfoData(tempObj.mContentID!, contentTitle: tempObj.mConrollerContentTitle!, contentImagePath: localPAthString , contentLink: tempObj.mControllerContentLink!, contentType: tempObj.mModelContentType!, contentCreatedTime: tempObj.mModelContentCreatedTime!, contentDescription: tempObj.mModelContentDescription!, contentModifiedAt: tempObj.mModelContentModifiedAt!, contentSyncDateTime: tempObj.mModelContentSyncDateTime!, contentTitleName: tempObj.mModelContentTitleName!, contentURL: tempObj.mModelContentURL!, contentZipPath: tempObj.mModelContentZipPath!)
             // append this contentListInfo array
             mControllerContentInfoArray.append(tempObj)
         }
+    }
+    
+    
+    func saveDataInDB(contentInfoObj :ContentInfo , imagePath : String)
+    {
+        // save the Content Info data in database
+        mContentListDBHandlerObj!.saveContentListInfoData(contentInfoObj.mContentID!, contentTitle: contentInfoObj.mConrollerContentTitle!, contentImagePath: imagePath , contentLink: contentInfoObj.mControllerContentLink!, contentType: contentInfoObj.mModelContentType!, contentCreatedTime: contentInfoObj.mModelContentCreatedTime!, contentDescription: contentInfoObj.mModelContentDescription!, contentModifiedAt: contentInfoObj.mModelContentModifiedAt!, contentSyncDateTime: contentInfoObj.mModelContentSyncDateTime!, contentTitleName: contentInfoObj.mModelContentTitleName!, contentURL: contentInfoObj.mModelContentURL!, contentZipPath: contentInfoObj.mModelContentZipPath!)
+
     }
     
     //  populate model & get model object from controller
@@ -227,7 +236,7 @@ class ContentListController : PContentListListener
         mContentViewModelListener!.updateViewModelContentListInformer()
     }
     
-    // update data from local db
+    // update data from local db when user is in offline mode
     func updateContentInfoDataFRomLocalDB()
     {
         // get content info list data from local database

@@ -20,6 +20,8 @@ class ContentListDBHandler {
     // create database
     init()
     {
+        
+
         // create default database path
         let filemgr = NSFileManager.defaultManager()
         let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,

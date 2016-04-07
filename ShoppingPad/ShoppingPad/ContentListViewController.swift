@@ -81,6 +81,7 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     // Return number of rows in tableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        print(mViewModelObj!.getContentInfoCount())
         return mViewModelObj!.getContentInfoCount()
     }
     
@@ -88,22 +89,25 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
        
-        //var customCell : CustomViewCell = CustomViewCell()
+        print("row value" , indexPath.row)
         //fetch the cell object from View
-        let cellObjectToDisplay = mViewModelObj!.getContentInfo(indexPath.row)
+        let cellObjectToDisplay : ContentViewModel? = mViewModelObj!.getContentInfo(indexPath.row)
         
+        
+        print("" , cellObjectToDisplay?.mContentID.value)
+
         //create object of customViewCell
         let tableCell = tableView.cellForRowAtIndexPath(indexPath)
         //var customCell : CustomViewCell = (tableView.cellForRowAtIndexPath(indexPath) as? CustomViewCell)!
         
         if (tableCell == nil)
         {
-            print("null")
+            print("" , cellObjectToDisplay?.mContentID.value)
             customCell = (tableView.dequeueReusableCellWithIdentifier("CustomViewCell") as?
                 CustomViewCell)!
             Utility().RoundImageView(customCell!.mContentCellImageView)
             customCell!.mContentCellImageView.image = UIImage(named: "defaultImage.jpg")
-            self.bindData(customCell!, contentViewModelObj: cellObjectToDisplay)
+            self.bindData(customCell!, contentViewModelObj: cellObjectToDisplay!)
 
         }
 
@@ -187,12 +191,20 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
     // bind the data of view controller to view model
     func bindData(customCellObj : CustomViewCell , contentViewModelObj : ContentViewModel)
     {
-        // bind content image
+//         bind content image
 //        var urlStr : NSString = contentViewModelObj.mContentImagePath.value.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-        //var searchURL : NSURL = NSURL(string: urlStr as String)!
-        let url = NSURL(string: contentViewModelObj.mContentImagePath.value)
+//        var searchURL : NSURL = NSURL(string: urlStr as String)!
         
+        print("String url" , contentViewModelObj.mContentImagePath.value)
+        let url = NSURL(string: contentViewModelObj.mContentImagePath.value)
+        //let url = NSURL(fileURLWithPath: contentViewModelObj.mContentImagePath.value)
         print("url" , url)
+        
+    if (Utility().isConnectedToNetwork() ==  true)
+        
+    {
+        let url = NSURL(string: contentViewModelObj.mContentImagePath.value)
+
         if (url != nil)
         {
             let image : ObservableBuffer<UIImage>? = Utility().fetchImage(url!).shareNext()
@@ -202,7 +214,24 @@ class ContentListViewController: UIViewController , ContentListViewObserver , UI
                 image!.bindTo(customCellObj.mContentCellImageView)
             }
         }
+    }
+        else
+    {
+        print("print id" , contentViewModelObj.mContentID.value)
+        print("print",contentViewModelObj.mContentImagePath.value)
+        let url = NSURL(fileURLWithPath: contentViewModelObj.mContentImagePath.value)
+        print("url in view controller " , url)
+        print("url in vc content_ID" , contentViewModelObj.mContentID.value)
+        let image : ObservableBuffer<UIImage>? = Utility().fetchImage(url).shareNext()
         
+        if ((image) != nil)
+        {
+            image!.bindTo(customCellObj.mContentCellImageView)
+        }
+    }
+
+    
+    
         // bind content title
         contentViewModelObj.mContentTitle.bindTo(customCellObj.mContentCellTitleLabel)
         
